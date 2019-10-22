@@ -9,6 +9,7 @@ using namespace sf;
 namespace penguine
 {
 	class Component;
+	class Scene;
 
 	class GameObject
 	{
@@ -18,10 +19,13 @@ namespace penguine
 
 		Transform* m_Transform;
 
+		Scene* m_Scene;
+
 		std::vector<Component*> m_Components;
 
 	public:
 		GameObject();
+		GameObject(Scene* scene);
 		virtual ~GameObject();
 
 		Transform* GetTransform();

@@ -16,14 +16,8 @@
     <Filter Include="Source Files\penguine">
       <UniqueIdentifier>{f7f5e0dc-86d6-4823-829b-884cc8a251f7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\penguine\DataStructures">
-      <UniqueIdentifier>{d3fc2a40-ba94-445e-b3e3-6a4853db8769}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\penguine">
       <UniqueIdentifier>{dda6dbf0-561b-4797-bfc9-2ede2cb9d569}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\penguine\DataStructures">
-      <UniqueIdentifier>{06c7cfe5-969f-449f-9b63-2e8ec8c60f42}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\penguine\Core">
       <UniqueIdentifier>{fbd6eb9c-81e0-4098-a5de-8af84ded1707}</UniqueIdentifier>
@@ -41,12 +35,6 @@
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BinaryTree.cpp">
-      <Filter>Source Files\penguine\DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="List.cpp">
-      <Filter>Source Files\penguine\DataStructures</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\penguine</Filter>
@@ -74,12 +62,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="List.h">
-      <Filter>Header Files\penguine\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="BinaryTree.h">
-      <Filter>Header Files\penguine\DataStructures</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\penguine</Filter>
     </ClInclude>

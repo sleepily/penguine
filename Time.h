@@ -9,7 +9,7 @@ namespace penguine
 	{
 	private:
 		Clock m_Clock;
-		Time m_LastTime, m_NewTime;
+		Time m_AbsoluteTime, m_LastTime, m_NewTime;
 
 		float m_DeltaTimeMicro;
 
@@ -20,6 +20,7 @@ namespace penguine
 		void Update();
 
 		float GetTimeInSeconds();
+		float GetTimeInMicroSeconds();
 
 		float GetDeltaTime();
 		float GetDeltaTimeMicro();

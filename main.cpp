@@ -27,9 +27,19 @@ int main()
 		window.display();
 	*/
 
+	/*
 	penguine::GameObject go;
 	go.AddComponent(new Component());
 	std::cout << go.ToString() << std::endl;
+	*/
+
+	penguine::Scene* scene = new penguine::Scene();
+
+	penguine::GameObject* go = new penguine::GameObject(scene);
+
+	penguine::Engine engine(scene);
+
+	engine.Start();
 
 	return 0;
 }

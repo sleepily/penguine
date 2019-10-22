@@ -19,12 +19,12 @@ namespace penguine
 	void Engine::Start()
 	{
 		InitializeComponents();
+		GameLoop();
 	}
 
 	void Engine::InitializeComponents()
 	{
 		m_Time = GameTime();
-		std::cout << m_Time.GetTimeInSeconds() << std::endl;
 	}
 
 	Engine* Engine::AddScene(Scene* scene)
@@ -43,19 +43,23 @@ namespace penguine
 	{
 		while (m_Graphics.GetWindow()->isOpen())
 		{
+			m_Time.Update();
+
+			std::cout << m_Time.GetTimeInSeconds() << std::endl;
+
 			// Need deltaTime from last Update()
 			Input();
 
 			// Count how long it took to do Input()
 			// Subtract that from the expected deltaTime for the next Frame
 			// Wait that amount
-			Update(0.01f);
+			Update(m_Time.GetDeltaTime());
 		}
 	}
 
 	void Engine::Input()
 	{
-		while (m_Graphics.GetWindow()->pollEvent(m_Event))
+		if (m_Graphics.GetWindow()->pollEvent(m_Event))
 			if (m_Event.type == sf::Event::Closed)
 				m_Graphics.GetWindow()->close();
 
@@ -70,6 +74,8 @@ namespace penguine
 			{
 				if (&go == nullptr)
 					continue;
+
+				std::cout << go.ToString() << std::endl;
 			}
 		}
 	}

@@ -12,6 +12,11 @@ namespace penguine
 		m_Name = "NewGameObject";
 	}
 
+	GameObject::GameObject(Scene* scene)
+	{
+		m_Scene = scene;
+	}
+
 	GameObject::~GameObject()
 	{
 
@@ -43,9 +48,7 @@ namespace penguine
 		outputString += "Components: " + std::to_string(componentCount) + ";\n";
 
 		for (Component* component : m_Components)
-		{
 			outputString += "\t" + component->GetName() + "\n";
-		}
 
 		return outputString;
 	}
