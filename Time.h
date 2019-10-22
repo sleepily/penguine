@@ -23,6 +23,7 @@ namespace penguine
 		float GetTimeInMicroSeconds();
 
 		float GetDeltaTime();
+		float GetDeltaTimeMilli();
 		float GetDeltaTimeMicro();
 	};
 }

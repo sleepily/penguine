@@ -2,6 +2,8 @@
 #include <string>
 #include "penguine/Engine.h"
 
+#define PENGUINE_DEBUG	true
+
 namespace penguine
 {
 	Engine::Engine(Scene* startScene)
@@ -45,10 +47,11 @@ namespace penguine
 		{
 			m_Time.Update();
 
-			std::cout << m_Time.GetTimeInSeconds() << std::endl;
-
-			// Need deltaTime from last Update()
 			Input();
+
+#if PENGUINE_DEBUG
+			std::cout << "Time: " << m_Time.GetTimeInSeconds() << "s. Delta Time: " << m_Time.GetDeltaTime() << "s." << std::endl;
+#endif
 
 			// Count how long it took to do Input()
 			// Subtract that from the expected deltaTime for the next Frame
@@ -57,13 +60,17 @@ namespace penguine
 		}
 	}
 
-	void Engine::Input()
+	float Engine::Input()
 	{
+		Clock inputClock;
+
 		if (m_Graphics.GetWindow()->pollEvent(m_Event))
 			if (m_Event.type == sf::Event::Closed)
 				m_Graphics.GetWindow()->close();
 
 		m_Graphics.GetWindow()->clear();
+		
+		return inputClock.getElapsedTime().asSeconds();
 	}
 
 	void Engine::Update(float deltaTimeInSeconds)

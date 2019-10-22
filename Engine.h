@@ -20,9 +20,9 @@ namespace penguine
 
 		GameTime m_Time;
 
-		void Input();
+		float Input();
 		void Update(float deltaTimeInSeconds);
-		void Draw();
+		float Draw();
 
 		void InitializeComponents();
 

@@ -19,6 +19,7 @@ namespace penguine
 		m_AbsoluteTime += m_LastTime;
 		m_LastTime = m_NewTime;
 		m_NewTime = m_Clock.restart();
+		m_DeltaTimeMicro = m_NewTime.asMicroseconds();
 	}
 
 	float GameTime::GetTimeInSeconds()
@@ -32,6 +33,11 @@ namespace penguine
 	}
 
 	float GameTime::GetDeltaTime()
+	{
+		return m_DeltaTimeMicro / 1000000.0f;
+	}
+
+	float GameTime::GetDeltaTimeMilli()
 	{
 		return m_DeltaTimeMicro / 1000.0f;
 	}
