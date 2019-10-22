@@ -53,9 +53,6 @@ namespace penguine
 			std::cout << "Time: " << m_Time.GetTimeInSeconds() << "s. Delta Time: " << m_Time.GetDeltaTime() << "s." << std::endl;
 #endif
 
-			// Count how long it took to do Input()
-			// Subtract that from the expected deltaTime for the next Frame
-			// Wait that amount
 			Update(m_Time.GetDeltaTime());
 		}
 	}
@@ -65,8 +62,15 @@ namespace penguine
 		Clock inputClock;
 
 		if (m_Graphics.GetWindow()->pollEvent(m_Event))
+		{
+			if (m_Event.type == sf::Event::KeyPressed)
+			{
+				// TODO: Call input manager
+			}
+
 			if (m_Event.type == sf::Event::Closed)
 				m_Graphics.GetWindow()->close();
+		}
 
 		m_Graphics.GetWindow()->clear();
 		
