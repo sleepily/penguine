@@ -1,8 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <stdio.h>
 #include <iostream>
-#include "List.h"
-#include "BinaryTree.h"
+#include "penguine/GameObject.h"
+#include "penguine/Engine.h"
+
+using namespace penguine;
 
 int main()
 {
@@ -23,8 +25,11 @@ int main()
 		window.clear();
 		window.draw(shape);
 		window.display();
-	}
 	*/
+
+	penguine::GameObject go;
+	go.AddComponent(new Component());
+	std::cout << go.ToString() << std::endl;
 
 	return 0;
 }

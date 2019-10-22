@@ -1,20 +1,40 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "penguine/Scene.h"
+#include "penguine/Graphics.h"
+#include "penguine/Time.h"
 
 using namespace sf;
 
-class Engine
+namespace penguine
 {
-private:
-	RenderWindow m_Window;
+	class Engine
+	{
+	private:
+		std::vector<Scene*> m_Scenes;
+		Scene* m_CurrentScene;
 
-	void input();
-	void update(float deltaTime);
-	void draw();
+		Graphics m_Graphics;
 
-public:
-	Engine();
-	~Engine();
+		Event m_Event;
 
-	void start();
-};
+		GameTime m_Time;
+
+		void Input();
+		void Update(float deltaTimeInSeconds);
+		void Draw();
+
+		void InitializeComponents();
+
+		void GameLoop();
+
+	public:
+		Engine(Scene* startScene);
+		~Engine();
+
+		void Start();
+
+		Engine* AddScene(Scene* scene);
+		std::vector<Scene*> GetScenes();
+	};
+}
