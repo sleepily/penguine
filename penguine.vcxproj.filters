@@ -31,16 +31,16 @@
     <Filter Include="Source Files\penguine\Components">
       <UniqueIdentifier>{89f8afac-6227-4941-9524-6dcc089c34d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\penguine\GameObject">
+      <UniqueIdentifier>{dc9414d4-1766-4af2-97b5-a449f118a922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\penguine\GameObject">
+      <UniqueIdentifier>{0c90042e-8ab6-4b79-bea2-c724ccfe7631}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\penguine</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Source Files\penguine</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>Source Files\penguine\Core</Filter>
@@ -54,23 +54,23 @@
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Source Files\penguine</Filter>
-    </ClCompile>
-    <ClCompile Include="PenguineObject.cpp">
-      <Filter>Source Files\penguine</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\penguine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\penguine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PenguineObject.cpp">
+      <Filter>Source Files\penguine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files\penguine\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\penguine</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Header Files\penguine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>Header Files\penguine\Core</Filter>
     </ClInclude>
@@ -80,17 +80,23 @@
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Header Files\penguine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header Files\penguine</Filter>
-    </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Header Files\penguine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="PenguineObject.h">
-      <Filter>Header Files\penguine</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Header Files\penguine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\penguine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\penguine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\penguine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PenguineObject.h">
+      <Filter>Header Files\penguine\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
