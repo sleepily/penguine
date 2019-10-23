@@ -147,7 +147,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Time.cpp" />
-    <ClCompile Include="PTransform.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h" />
@@ -158,7 +158,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Time.h" />
-    <ClInclude Include="PTransform.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

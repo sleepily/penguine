@@ -4,6 +4,8 @@
 
 namespace penguine
 {
+	class Component;
+
 	class SpriteRenderer : public Component
 	{
 	protected:
@@ -16,6 +18,7 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
+		void SetSprite(sf::Sprite* sprite);
 		sf::Sprite* GetSprite();
 	};
 }

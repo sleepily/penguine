@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include "penguine/GameObject.h"
 #include "penguine/PenguineObject.h"
+#include "penguine/GameObject.h"
 
 namespace penguine
 {
@@ -11,7 +11,6 @@ namespace penguine
 	{
 	protected:
 		bool m_IsEnabled;
-		std::string m_Name;
 
 		GameObject* m_GameObject;
 
@@ -22,7 +21,7 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
-		std::string GetName();
+		virtual std::string ToString();
 
 		friend class GameObject;
 	};

@@ -51,9 +51,6 @@
     <ClCompile Include="Time.cpp">
       <Filter>Source Files\penguine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="PTransform.cpp">
-      <Filter>Source Files\penguine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
@@ -62,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="PenguineObject.cpp">
       <Filter>Source Files\penguine</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,9 +77,6 @@
     <ClInclude Include="Graphics.h">
       <Filter>Header Files\penguine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="PTransform.h">
-      <Filter>Header Files\penguine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Header Files\penguine\Components</Filter>
     </ClInclude>
@@ -91,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="PenguineObject.h">
       <Filter>Header Files\penguine</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\penguine\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

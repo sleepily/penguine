@@ -4,19 +4,20 @@
 #include <string>
 #include "penguine/Component.h"
 #include "penguine/PenguineObject.h"
+#include "penguine/Transform.h"
 
 namespace penguine
 {
-	class Component;
 	class Scene;
+	class Component;
+	class Transform;
 
 	class GameObject: public PenguineObject
 	{
 	protected:
-		std::string m_Name;
 		std::string m_Type;
 
-		sf::Transform* m_Transform;
+		Transform* m_Transform;
 
 		Scene* m_Scene;
 
@@ -27,16 +28,17 @@ namespace penguine
 		GameObject(Scene* scene);
 		virtual ~GameObject();
 
-		std::string GetName();
-
 		virtual void Update();
+		virtual void Render();
 
-		sf::Transform* GetTransform();
+		virtual void SetEngine(Engine* engine);
+
+		Transform* GetTransform();
 		std::vector<Component*>* GetComponents();
 
 		Component* AddComponent(Component* component);
 
-		std::string ToString();
+		virtual std::string ToString();
 
 		friend class Component;
 	};

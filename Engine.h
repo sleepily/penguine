@@ -29,6 +29,7 @@ namespace penguine
 		void GameLoop();
 
 	public:
+		Engine();
 		Engine(Scene* startScene);
 		~Engine();
 

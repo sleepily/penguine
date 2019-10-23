@@ -8,11 +8,12 @@
 namespace penguine
 {
 	class Scene;
+	class Component;
 
 	GameObject::GameObject()
 	{
 		m_Name = "Default GameObject";
-		m_Transform = new sf::Transform();
+		m_Transform = new Transform();
 		m_Scene = NULL;
 		m_Components = new std::vector<Component*>();
 	}
@@ -20,7 +21,7 @@ namespace penguine
 	GameObject::GameObject(Scene* scene)
 	{
 		m_Name = "Default GameObject";
-		m_Transform = new sf::Transform();
+		m_Transform = new Transform();
 		m_Components = new std::vector<Component*>();
 
 		m_Scene = scene;
@@ -30,11 +31,6 @@ namespace penguine
 	GameObject::~GameObject()
 	{
 
-	}
-
-	std::string GameObject::GetName()
-	{
-		return m_Name;
 	}
 
 	void GameObject::Update()
@@ -49,7 +45,17 @@ namespace penguine
 			component->Render();
 	}
 
-	sf::Transform* GameObject::GetTransform()
+	void GameObject::SetEngine(Engine* engine)
+	{
+		this->engine = engine;
+
+		std::cout << this->engine << std::endl;
+
+		for (Component* component : *m_Components)
+			component->engine = engine;
+	}
+
+	Transform* GameObject::GetTransform()
 	{
 		return m_Transform;
 	}
@@ -62,6 +68,7 @@ namespace penguine
 	Component* GameObject::AddComponent(Component* component)
 	{
 		component->m_GameObject = this;
+		component->engine = engine;
 		m_Components->push_back(component);
 
 #if PENGUINE_DEBUG
@@ -80,7 +87,7 @@ namespace penguine
 		outputString += "Components: " + std::to_string(componentCount) + ";\n";
 
 		for (Component* component : *m_Components)
-			outputString += "\t" + component->GetName() + "\n";
+			outputString += "\t" + component->ToString() + "\n";
 
 		return outputString;
 	}

@@ -4,16 +4,20 @@
 
 namespace penguine
 {
-	Engine::Engine(Scene* startScene)
+	Engine::Engine()
 	{
 		m_TargetFPS = 60.0f;
 		m_TargetInputPolls = 10;
 
-		m_Scenes.push_back(startScene->SetActive(true));
 		m_Event = new sf::Event();
 		m_Time = new GameTime();
 
 		m_Graphics = new Graphics(sf::Vector2u(400, 400));
+	}
+	Engine::Engine(Scene* startScene)
+	{
+		Engine();
+		AddScene(startScene);
 
 #if PENGUINE_DEBUG
 		std::cout << "\tStarting Penguine with scene " << startScene->GetName() << std::endl << std::endl;
@@ -27,6 +31,15 @@ namespace penguine
 
 	void Engine::Start()
 	{
+		for (Scene* scene : m_Scenes)
+			scene->engine = this;
+
+		if (m_Scenes.size() == 0)
+		{
+			std::cout << "No scene loaded! Please add Scenes using engine->AddScene(). Aborting..." << std::endl;
+			return;
+		}
+
 		GameLoop();
 	}
 
@@ -37,8 +50,10 @@ namespace penguine
 
 	Engine* Engine::AddScene(Scene* scene)
 	{
-		m_Scenes.push_back(scene);
+		scene->SetEngine(this);
 
+		m_Scenes.push_back(scene);
+		
 		return this;
 	}
 
@@ -104,7 +119,7 @@ namespace penguine
 		for (Scene* scene : m_Scenes)
 		{
 #if PENGUINE_DEBUG
-			std::cout << "Scene: " << scene->GetName() << "; GameObjects: " << scene->GetGameObjectCount() << std::endl;
+			std::cout << scene->ToString() << std::endl;
 #endif
 			scene->Update();
 		}
@@ -113,6 +128,11 @@ namespace penguine
 	void Engine::Render()
 	{
 		m_Graphics->GetWindow()->clear();
+
+		for (Scene* scene : m_Scenes)
+		{
+			scene->Render();
+		}
 
 		m_Graphics->GetWindow()->display();
 	}

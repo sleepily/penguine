@@ -11,7 +11,7 @@ namespace penguine
 	class Scene: public PenguineObject
 	{
 	private:
-		std::vector<GameObject> m_GameObjects;
+		std::vector<GameObject*>* m_GameObjects;
 		bool m_IsActive;
 
 		size_t m_SceneID;
@@ -27,10 +27,14 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
+		virtual void SetEngine(Engine* engine);
+
 		std::string GetName();
-		std::vector<GameObject> GetGameObjects();
+		std::vector<GameObject*>* GetGameObjects();
 		void AddGameObject(GameObject* go);
 		Scene* AppendGameObjectsFromScene(Scene* fromScene);
+
+		virtual std::string ToString();
 
 		uint GetGameObjectCount();
 

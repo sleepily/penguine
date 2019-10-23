@@ -19,9 +19,10 @@ namespace penguine
 
 	void Component::Render()
 	{
+
 	}
 
-	std::string Component::GetName()
+	std::string Component::ToString()
 	{
 		return m_Name;
 	}

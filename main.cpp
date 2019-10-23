@@ -6,7 +6,9 @@
 
 int main()
 {
-	// Replace this with XML reading
+	penguine::Engine* engine = new penguine::Engine();
+
+	// TODO: Replace this with XML reading
 	penguine::Scene* scene = new penguine::Scene();
 
 	penguine::GameObject* go = new penguine::GameObject();
@@ -15,10 +17,9 @@ int main()
 
 	go->AddComponent(new penguine::SpriteRenderer());
 
-	// Engine
-	penguine::Engine engine(scene);
+	engine->AddScene(scene);
 
-	engine.Start();
+	engine->Start();
 
 	return 0;
 }

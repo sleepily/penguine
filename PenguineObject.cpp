@@ -5,14 +5,33 @@ namespace penguine
 {
 	PenguineObject::PenguineObject()
 	{
+		engine = nullptr;
 	}
+
 	PenguineObject::~PenguineObject()
 	{
 	}
+
 	void PenguineObject::Update()
 	{
 	}
+
 	void PenguineObject::Render()
 	{
+	}
+
+	void PenguineObject::SetEngine(Engine* engine)
+	{
+		this->engine = engine;
+	}
+
+	std::string PenguineObject::ToString()
+	{
+		return m_Name;
+	}
+
+	std::string PenguineObject::GetName()
+	{
+		return m_Name;
 	}
 }
