@@ -16,6 +16,8 @@ namespace penguine
 		Component();
 		virtual ~Component();
 
+		virtual void Update();
+
 		GameObject* m_GameObject;
 
 		std::string GetName();

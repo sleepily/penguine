@@ -15,6 +15,8 @@ namespace penguine
 		SpriteRenderer();
 		virtual ~SpriteRenderer();
 
+		virtual void Update();
+
 		sf::Sprite sprite;
 	};
 }

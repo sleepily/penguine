@@ -9,6 +9,12 @@ namespace penguine
 
 	Component::~Component()
 	{
+
+	}
+
+	void Component::Update()
+	{
+
 	}
 
 	std::string Component::GetName()

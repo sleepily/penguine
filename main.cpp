@@ -35,7 +35,9 @@ int main()
 
 	penguine::Scene* scene = new penguine::Scene();
 
-	penguine::GameObject* go = new penguine::GameObject(scene);
+	penguine::GameObject* go = new penguine::GameObject();
+
+	scene->AddGameObject(go);
 
 	penguine::Engine engine(scene);
 

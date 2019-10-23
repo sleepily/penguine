@@ -2,19 +2,27 @@
 #include <vector>
 #include "penguine/GameObject.h"
 #include "penguine/Component.h"
+#include "penguine/Scene.h"
 
 using namespace sf;
 
 namespace penguine
 {
+	class Scene;
+
 	GameObject::GameObject()
 	{
-		m_Name = "NewGameObject";
+		m_Name = "GameObject";
+		m_Transform = new Transform();
+		m_Scene = NULL;
 	}
 
 	GameObject::GameObject(Scene* scene)
 	{
+		m_Name = "GameObject";
+		m_Transform = new Transform();
 		m_Scene = scene;
+		scene->AddGameObject(this);
 	}
 
 	GameObject::~GameObject()

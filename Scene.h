@@ -3,6 +3,8 @@
 
 class GameObject;
 
+typedef unsigned int	uint;
+
 namespace penguine
 {
 	class Scene
@@ -11,12 +13,18 @@ namespace penguine
 		std::vector<GameObject> m_GameObjects;
 		bool m_IsActive;
 
+		uint m_GameObjectCount;
+
 	public:
 		Scene();
 		virtual ~Scene();
 
+
 		std::vector<GameObject> GetGameObjects();
-		Scene* AppendGameObjectsFromScene(Scene fromScene);
+		void AddGameObject(GameObject* go);
+		Scene* AppendGameObjectsFromScene(Scene* fromScene);
+
+		uint GetGameObjectCount();
 
 		Scene* SetActive(bool isActive);
 	};

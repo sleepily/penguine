@@ -16,4 +16,9 @@ namespace penguine
 	{
 
 	}
+
+	void SpriteRenderer::Update()
+	{
+
+	}
 }

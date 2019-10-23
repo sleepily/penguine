@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
+typedef unsigned int	uint;
 
 namespace penguine
 {
@@ -11,10 +12,13 @@ namespace penguine
 		RenderWindow* m_Window;
 		Time m_LastUpdate;
 
-		Vector2i m_Resolution;
+		Vector2u m_Resolution;
+
+		Vector2u m_ResolutionDefault;
 
 	public:
 		Graphics();
+		Graphics(uint x, uint y);
 		~Graphics();
 
 		RenderWindow* GetWindow();

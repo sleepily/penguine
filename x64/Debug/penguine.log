@@ -1,2 +1,9 @@
-﻿  Engine.cpp
+﻿  Component.cpp
+  Engine.cpp
+  GameObject.cpp
+  PTransform.cpp
+  Scene.cpp
+  SpriteRenderer.cpp
+  main.cpp
+  Generating Code...
   penguine.vcxproj -> X:\Work\Uni\Game Programming\penguine\x64\Debug\penguine.exe

@@ -27,6 +27,7 @@ namespace penguine
 	void Engine::InitializeComponents()
 	{
 		m_Time = GameTime();
+		m_Graphics = Graphics(400, 400);
 	}
 
 	Engine* Engine::AddScene(Scene* scene)
@@ -81,13 +82,20 @@ namespace penguine
 	{
 		for (Scene* scene : m_Scenes)
 		{
+#if PENGUINE_DEBUG
+			std::cout << "GameObjects: " << scene->GetGameObjectCount() << std::endl;
+#endif
 			for (GameObject go : scene->GetGameObjects())
 			{
 				if (&go == nullptr)
 					continue;
 
+#if PENGUINE_DEBUG
 				std::cout << go.ToString() << std::endl;
+#endif
 			}
 		}
+
+		m_Graphics.GetWindow()->display();
 	}
 }
