@@ -12,13 +12,12 @@ namespace penguine
 	{
 	private:
 		std::vector<Scene*> m_Scenes;
-		Scene* m_CurrentScene;
 
-		Graphics m_Graphics;
+		Graphics* m_Graphics;
 
-		Event m_Event;
+		Event* m_Event;
 
-		GameTime m_Time;
+		GameTime* m_Time;
 
 		float Input();
 		void Update(float deltaTimeInSeconds);

@@ -14,7 +14,7 @@ namespace penguine
 
 	void Component::Update()
 	{
-
+		
 	}
 
 	std::string Component::GetName()

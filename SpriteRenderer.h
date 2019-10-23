@@ -9,7 +9,7 @@ namespace penguine
 	class SpriteRenderer : public Component
 	{
 	protected:
-		Sprite m_Sprite;
+		Sprite* m_Sprite;
 
 	public:
 		SpriteRenderer();
@@ -17,6 +17,6 @@ namespace penguine
 
 		virtual void Update();
 
-		sf::Sprite sprite;
+		sf::Sprite* GetSprite();
 	};
 }

@@ -9,16 +9,16 @@ namespace penguine
 	class Component
 	{
 	protected:
-
+		bool m_IsEnabled;
 		std::string m_Name;
+
+		GameObject* m_GameObject;
 
 	public:
 		Component();
 		virtual ~Component();
 
 		virtual void Update();
-
-		GameObject* m_GameObject;
 
 		std::string GetName();
 

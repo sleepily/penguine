@@ -5,6 +5,7 @@ namespace penguine
 {
 	Scene::Scene()
 	{
+		m_Name = "SampleScene";
 		m_IsActive = true;
 		m_GameObjectCount = 0;
 	}
@@ -18,6 +19,11 @@ namespace penguine
 	{
 		m_GameObjects.push_back(*go);
 		m_GameObjectCount++;
+	}
+
+	std::string Scene::GetName()
+	{
+		return m_Name;
 	}
 
 	std::vector<GameObject> Scene::GetGameObjects()

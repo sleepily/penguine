@@ -9,7 +9,7 @@ namespace penguine
 	SpriteRenderer::SpriteRenderer()
 	{
 		Texture* texture = new Texture();
-		this->m_Sprite = Sprite(*texture);
+		m_Sprite = new Sprite(*texture);
 	}
 
 	SpriteRenderer::~SpriteRenderer()
@@ -20,5 +20,9 @@ namespace penguine
 	void SpriteRenderer::Update()
 	{
 
+	}
+	sf::Sprite* SpriteRenderer::GetSprite()
+	{
+		return m_Sprite;
 	}
 }

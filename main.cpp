@@ -1,8 +1,8 @@
-#include <SFML/Graphics.hpp>
 #include <stdio.h>
 #include <iostream>
 #include "penguine/GameObject.h"
 #include "penguine/Engine.h"
+#include "penguine/SpriteRenderer.h"
 
 using namespace penguine;
 
@@ -27,17 +27,13 @@ int main()
 		window.display();
 	*/
 
-	/*
-	penguine::GameObject go;
-	go.AddComponent(new Component());
-	std::cout << go.ToString() << std::endl;
-	*/
-
 	penguine::Scene* scene = new penguine::Scene();
 
 	penguine::GameObject* go = new penguine::GameObject();
 
 	scene->AddGameObject(go);
+
+	go->AddComponent(new SpriteRenderer());
 
 	penguine::Engine engine(scene);
 

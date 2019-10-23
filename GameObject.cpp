@@ -12,14 +12,14 @@ namespace penguine
 
 	GameObject::GameObject()
 	{
-		m_Name = "GameObject";
+		m_Name = "Default GameObject";
 		m_Transform = new Transform();
 		m_Scene = NULL;
 	}
 
 	GameObject::GameObject(Scene* scene)
 	{
-		m_Name = "GameObject";
+		m_Name = "Default GameObject";
 		m_Transform = new Transform();
 		m_Scene = scene;
 		scene->AddGameObject(this);

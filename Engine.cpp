@@ -9,8 +9,9 @@ namespace penguine
 	Engine::Engine(Scene* startScene)
 	{
 		m_Scenes.push_back(startScene->SetActive(true));
-
-		InitializeComponents();
+		m_Event = new Event();
+		m_Time = new GameTime();
+		m_Graphics = new Graphics(400, 400);
 	}
 
 	Engine::~Engine()
@@ -20,14 +21,7 @@ namespace penguine
 
 	void Engine::Start()
 	{
-		InitializeComponents();
 		GameLoop();
-	}
-
-	void Engine::InitializeComponents()
-	{
-		m_Time = GameTime();
-		m_Graphics = Graphics(400, 400);
 	}
 
 	Engine* Engine::AddScene(Scene* scene)
@@ -44,17 +38,17 @@ namespace penguine
 	
 	void Engine::GameLoop()
 	{
-		while (m_Graphics.GetWindow()->isOpen())
+		while (m_Graphics->GetWindow()->isOpen())
 		{
-			m_Time.Update();
+			m_Time->Update();
 
 			Input();
 
 #if PENGUINE_DEBUG
-			std::cout << "Time: " << m_Time.GetTimeInSeconds() << "s. Delta Time: " << m_Time.GetDeltaTime() << "s." << std::endl;
+			std::cout << "Time: " << m_Time->GetTimeInSeconds() << "s. Delta Time: " << m_Time->GetDeltaTime() << "s." << std::endl;
 #endif
 
-			Update(m_Time.GetDeltaTime());
+			Update(m_Time->GetDeltaTime());
 		}
 	}
 
@@ -62,18 +56,18 @@ namespace penguine
 	{
 		Clock inputClock;
 
-		if (m_Graphics.GetWindow()->pollEvent(m_Event))
+		if (m_Graphics->GetWindow()->pollEvent(*m_Event))
 		{
-			if (m_Event.type == sf::Event::KeyPressed)
+			if (m_Event->type == sf::Event::KeyPressed)
 			{
 				// TODO: Call input manager
 			}
 
-			if (m_Event.type == sf::Event::Closed)
-				m_Graphics.GetWindow()->close();
+			if (m_Event->type == sf::Event::Closed)
+				m_Graphics->GetWindow()->close();
 		}
 
-		m_Graphics.GetWindow()->clear();
+		m_Graphics->GetWindow()->clear();
 		
 		return inputClock.getElapsedTime().asSeconds();
 	}
@@ -83,7 +77,7 @@ namespace penguine
 		for (Scene* scene : m_Scenes)
 		{
 #if PENGUINE_DEBUG
-			std::cout << "GameObjects: " << scene->GetGameObjectCount() << std::endl;
+			std::cout << "Scene: " << scene->GetName() << "; GameObjects: " << scene->GetGameObjectCount() << std::endl;
 #endif
 			for (GameObject go : scene->GetGameObjects())
 			{
@@ -96,6 +90,6 @@ namespace penguine
 			}
 		}
 
-		m_Graphics.GetWindow()->display();
+		m_Graphics->GetWindow()->display();
 	}
 }
