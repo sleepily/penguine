@@ -8,9 +8,6 @@ namespace penguine
 {
 	SpriteRenderer::SpriteRenderer()
 	{
-#if PENGUINE_DEBUG
-		std::cout << "Initializing SpriteRenderer..." << std::endl;
-#endif
 		sf::Texture* texture = new sf::Texture();
 		texture->loadFromFile("assets/snake1.png");
 		m_Sprite = new sf::Sprite(*texture);

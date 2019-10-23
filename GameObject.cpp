@@ -49,8 +49,6 @@ namespace penguine
 	{
 		this->engine = engine;
 
-		std::cout << this->engine << std::endl;
-
 		for (Component* component : *m_Components)
 			component->engine = engine;
 	}

@@ -64,6 +64,8 @@ namespace penguine
 	
 	void Engine::GameLoop()
 	{
+		uint inputPolls = 0;
+
 		while (m_Graphics->GetWindow()->isOpen())
 		{
 			m_Time->ResetClock();
@@ -76,15 +78,19 @@ namespace penguine
 			if (m_Time->GetTimeInSeconds() < m_Time->GetLastUpdate().asSeconds() + fpsDelay)
 			{
 				sf::sleep(sf::microseconds((int)(fpsDelay / m_TargetInputPolls * 1000000.0f)));
+				inputPolls++;
 				continue;
 			}
+
 			float fps = 1.0f / m_Time->GetDeltaTime();
-			/*
 #if PENGUINE_DEBUG
-			std::cout << std::endl << "Time: " << m_Time->GetTimeInSeconds() << "s. Delta Time: " << m_Time->GetDeltaTime() << "s." << std::endl;
-#endif
-*/
+			std::cout << std::endl << "Time: " << m_Time->GetTimeInSeconds() << " s" << std::endl;
+			std::cout << "Delta Time: " << m_Time->GetDeltaTime() << " s" << std::endl;
 			std::cout << "FPS: " << fps << std::endl;
+			std::cout << "Input Polls: " << inputPolls << std::endl << std::endl;
+#endif
+
+			inputPolls = 0;
 
 			Update(m_Time->GetDeltaTime());
 			Render();
@@ -95,8 +101,6 @@ namespace penguine
 	{
 		sf::Clock inputClock;
 
-		std::cout << "Getting Input..." << std::endl;
-
 		m_Event = new sf::Event();
 
 		while (m_Graphics->GetWindow()->pollEvent(*m_Event))
@@ -106,8 +110,6 @@ namespace penguine
 			if (m_Event->type == sf::Event::Closed)
 				m_Graphics->GetWindow()->close();
 		}
-
-		// std::cout << "Got Input." << std::endl;
 
 		return inputClock.getElapsedTime().asSeconds();
 	}
