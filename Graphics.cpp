@@ -7,13 +7,13 @@ namespace penguine
 {
 	Graphics::Graphics()
 	{
-		m_ResolutionDefault = Vector2u(400, 400);
-		Graphics(m_ResolutionDefault.x, m_ResolutionDefault.y);
+		m_ResolutionDefault = sf::Vector2u(400, 400);
+		Graphics(m_ResolutionDefault);
 	}
 
-	Graphics::Graphics(uint x, uint y)
+	Graphics::Graphics(sf::Vector2u resolution)
 	{
-		m_Window = new sf::RenderWindow(sf::VideoMode(x, y), "penguine");
+		m_Window = new sf::RenderWindow(sf::VideoMode(resolution.x, resolution.y), "penguine");
 	}
 
 	Graphics::~Graphics()
@@ -21,7 +21,7 @@ namespace penguine
 	
 	}
 
-	RenderWindow* Graphics::GetWindow()
+	sf::RenderWindow* Graphics::GetWindow()
 	{
 		return m_Window;
 	}

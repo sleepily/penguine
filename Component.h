@@ -1,12 +1,13 @@
 #pragma once
 #include <string>
 #include "penguine/GameObject.h"
+#include "penguine/PenguineObject.h"
 
 namespace penguine
 {
 	class GameObject;
 
-	class Component
+	class Component: public PenguineObject
 	{
 	protected:
 		bool m_IsEnabled;
@@ -19,6 +20,7 @@ namespace penguine
 		virtual ~Component();
 
 		virtual void Update();
+		virtual void Render();
 
 		std::string GetName();
 

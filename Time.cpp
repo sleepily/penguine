@@ -1,25 +1,34 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "penguine/Time.h"
 
 namespace penguine
 {
 	GameTime::GameTime()
 	{
-		m_Clock = Clock();
+		m_Clock = m_DeltaClock = sf::Clock();
 		m_DeltaTimeMicro = 0.0f;
 	}
 
 	void GameTime::Start()
 	{
-		m_AbsoluteTime = m_LastTime = m_NewTime = Time();
+		m_AbsoluteTime = m_LastUpdate = sf::Time();
+	}
+
+	void GameTime::ResetClock()
+	{
+		m_AbsoluteTime = m_Clock.getElapsedTime();
 	}
 
 	void GameTime::Update()
 	{
-		m_AbsoluteTime += m_LastTime;
-		m_LastTime = m_NewTime;
-		m_NewTime = m_Clock.restart();
-		m_DeltaTimeMicro = m_NewTime.asMicroseconds();
+		m_DeltaTimeMicro = m_AbsoluteTime.asMicroseconds() - m_LastUpdate.asMicroseconds();
+		m_LastUpdate = m_AbsoluteTime;
+	}
+
+	sf::Time GameTime::GetLastUpdate()
+	{
+		return m_LastUpdate;
 	}
 
 	float GameTime::GetTimeInSeconds()

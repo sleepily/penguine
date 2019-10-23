@@ -4,7 +4,7 @@
 #include "penguine/Graphics.h"
 #include "penguine/Time.h"
 
-using namespace sf;
+typedef unsigned int	uint;
 
 namespace penguine
 {
@@ -15,15 +15,16 @@ namespace penguine
 
 		Graphics* m_Graphics;
 
-		Event* m_Event;
+		sf::Event* m_Event;
 
 		GameTime* m_Time;
 
+		float m_TargetFPS;
+		uint m_TargetInputPolls;
+
 		float Input();
 		void Update(float deltaTimeInSeconds);
-		float Draw();
-
-		void InitializeComponents();
+		void Render();
 
 		void GameLoop();
 
@@ -32,6 +33,8 @@ namespace penguine
 		~Engine();
 
 		void Start();
+
+		Graphics* GetGraphics();
 
 		Engine* AddScene(Scene* scene);
 		std::vector<Scene*> GetScenes();

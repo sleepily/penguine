@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-using namespace sf;
 typedef unsigned int	uint;
 
 namespace penguine
@@ -9,18 +8,17 @@ namespace penguine
 	class Graphics
 	{
 	private:
-		RenderWindow* m_Window;
-		Time m_LastUpdate;
+		sf::RenderWindow* m_Window;
 
-		Vector2u m_Resolution;
+		sf::Vector2u m_Resolution;
 
-		Vector2u m_ResolutionDefault;
+		sf::Vector2u m_ResolutionDefault;
 
 	public:
 		Graphics();
-		Graphics(uint x, uint y);
+		Graphics(sf::Vector2u resolution);
 		~Graphics();
 
-		RenderWindow* GetWindow();
+		sf::RenderWindow* GetWindow();
 	};
 }

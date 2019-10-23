@@ -1,5 +1,5 @@
 #include "Scene.h"
-
+#include <iostream>
 
 namespace penguine
 {
@@ -8,6 +8,7 @@ namespace penguine
 		m_Name = "SampleScene";
 		m_IsActive = true;
 		m_GameObjectCount = 0;
+		m_SceneID = 1;
 	}
 
 	Scene::~Scene()
@@ -15,8 +16,39 @@ namespace penguine
 
 	}
 
+	void Scene::Update()
+	{
+		for (GameObject go : m_GameObjects)
+		{
+			if (&go == nullptr)
+				continue;
+
+			go.Update();
+
+#if PENGUINE_DEBUG
+			std::cout << go.ToString() << std::endl;
+#endif
+		}
+	}
+
+	void Scene::Render()
+	{
+		for (GameObject go : m_GameObjects)
+		{
+			if (&go == nullptr)
+				continue;
+
+			go.Render();
+
+#if PENGUINE_DEBUG
+			std::cout << go.ToString() << std::endl;
+#endif
+		}
+	}
+
 	void Scene::AddGameObject(GameObject* go)
 	{
+		std::cout << "Adding GameObject " << go->GetName() << " to Scene " << m_Name << std::endl;
 		m_GameObjects.push_back(*go);
 		m_GameObjectCount++;
 	}

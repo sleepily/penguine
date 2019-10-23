@@ -2,16 +2,22 @@
 #include <string>
 #include "penguine/Engine.h"
 
-#define PENGUINE_DEBUG	true
-
 namespace penguine
 {
 	Engine::Engine(Scene* startScene)
 	{
+		m_TargetFPS = 60.0f;
+		m_TargetInputPolls = 10;
+
 		m_Scenes.push_back(startScene->SetActive(true));
-		m_Event = new Event();
+		m_Event = new sf::Event();
 		m_Time = new GameTime();
-		m_Graphics = new Graphics(400, 400);
+
+		m_Graphics = new Graphics(sf::Vector2u(400, 400));
+
+#if PENGUINE_DEBUG
+		std::cout << "\tStarting Penguine with scene " << startScene->GetName() << std::endl << std::endl;
+#endif
 	}
 
 	Engine::~Engine()
@@ -22,6 +28,11 @@ namespace penguine
 	void Engine::Start()
 	{
 		GameLoop();
+	}
+
+	Graphics* Engine::GetGraphics()
+	{
+		return m_Graphics;
 	}
 
 	Engine* Engine::AddScene(Scene* scene)
@@ -40,55 +51,68 @@ namespace penguine
 	{
 		while (m_Graphics->GetWindow()->isOpen())
 		{
-			m_Time->Update();
+			m_Time->ResetClock();
 
 			Input();
 
+			// Prevent rendering too fast using target FPS
+			float fpsDelay = 1.0f / m_TargetFPS;
+
+			if (m_Time->GetTimeInSeconds() < m_Time->GetLastUpdate().asSeconds() + fpsDelay)
+			{
+				sf::sleep(sf::microseconds((int)(fpsDelay / m_TargetInputPolls * 1000000.0f)));
+				continue;
+			}
+			float fps = 1.0f / m_Time->GetDeltaTime();
+			/*
 #if PENGUINE_DEBUG
-			std::cout << "Time: " << m_Time->GetTimeInSeconds() << "s. Delta Time: " << m_Time->GetDeltaTime() << "s." << std::endl;
+			std::cout << std::endl << "Time: " << m_Time->GetTimeInSeconds() << "s. Delta Time: " << m_Time->GetDeltaTime() << "s." << std::endl;
 #endif
+*/
+			std::cout << "FPS: " << fps << std::endl;
 
 			Update(m_Time->GetDeltaTime());
+			Render();
 		}
 	}
 
 	float Engine::Input()
 	{
-		Clock inputClock;
+		sf::Clock inputClock;
 
-		if (m_Graphics->GetWindow()->pollEvent(*m_Event))
+		std::cout << "Getting Input..." << std::endl;
+
+		m_Event = new sf::Event();
+
+		while (m_Graphics->GetWindow()->pollEvent(*m_Event))
 		{
-			if (m_Event->type == sf::Event::KeyPressed)
-			{
-				// TODO: Call input manager
-			}
+			// TODO: add Input class
 
 			if (m_Event->type == sf::Event::Closed)
 				m_Graphics->GetWindow()->close();
 		}
 
-		m_Graphics->GetWindow()->clear();
-		
+		// std::cout << "Got Input." << std::endl;
+
 		return inputClock.getElapsedTime().asSeconds();
 	}
 
 	void Engine::Update(float deltaTimeInSeconds)
 	{
+		m_Time->Update();
+
 		for (Scene* scene : m_Scenes)
 		{
 #if PENGUINE_DEBUG
 			std::cout << "Scene: " << scene->GetName() << "; GameObjects: " << scene->GetGameObjectCount() << std::endl;
 #endif
-			for (GameObject go : scene->GetGameObjects())
-			{
-				if (&go == nullptr)
-					continue;
-
-#if PENGUINE_DEBUG
-				std::cout << go.ToString() << std::endl;
-#endif
-			}
+			scene->Update();
 		}
+	}
+
+	void Engine::Render()
+	{
+		m_Graphics->GetWindow()->clear();
 
 		m_Graphics->GetWindow()->display();
 	}

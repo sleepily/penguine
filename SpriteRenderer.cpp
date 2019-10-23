@@ -1,15 +1,17 @@
 #include <SFML/Graphics.hpp>
 #include "penguine/SpriteRenderer.h"
-
-using namespace sf;
-
+#include <iostream>
 
 namespace penguine
 {
 	SpriteRenderer::SpriteRenderer()
 	{
-		Texture* texture = new Texture();
-		m_Sprite = new Sprite(*texture);
+#if PENGUINE_DEBUG
+		std::cout << "Initializing SpriteRenderer..." << std::endl;
+#endif
+		sf::Texture* texture = new sf::Texture();
+		m_Sprite = new sf::Sprite(*texture);
+		m_Name = "SpriteRenderer";
 	}
 
 	SpriteRenderer::~SpriteRenderer()
@@ -21,6 +23,11 @@ namespace penguine
 	{
 
 	}
+
+	void SpriteRenderer::Render()
+	{
+	}
+
 	sf::Sprite* SpriteRenderer::GetSprite()
 	{
 		return m_Sprite;

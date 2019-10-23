@@ -60,6 +60,9 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Source Files\penguine</Filter>
     </ClCompile>
+    <ClCompile Include="PenguineObject.cpp">
+      <Filter>Source Files\penguine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Header Files\penguine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PenguineObject.h">
+      <Filter>Header Files\penguine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

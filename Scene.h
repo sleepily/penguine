@@ -1,18 +1,20 @@
 #pragma once
 #include <string>
 #include "penguine/GameObject.h"
+#include "penguine/PenguineObject.h"
+typedef unsigned int	uint;
 
 class GameObject;
 
-typedef unsigned int	uint;
-
 namespace penguine
 {
-	class Scene
+	class Scene: public PenguineObject
 	{
 	private:
 		std::vector<GameObject> m_GameObjects;
 		bool m_IsActive;
+
+		size_t m_SceneID;
 
 		std::string m_Name;
 
@@ -21,6 +23,9 @@ namespace penguine
 	public:
 		Scene();
 		virtual ~Scene();
+
+		virtual void Update();
+		virtual void Render();
 
 		std::string GetName();
 		std::vector<GameObject> GetGameObjects();

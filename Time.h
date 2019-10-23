@@ -1,15 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-using namespace sf;
-
 namespace penguine
 {
 	class GameTime
 	{
 	private:
-		Clock m_Clock;
-		Time m_AbsoluteTime, m_LastTime, m_NewTime;
+		sf::Clock m_Clock, m_DeltaClock;
+		sf::Time m_AbsoluteTime, m_LastUpdate;
 
 		float m_DeltaTimeMicro;
 
@@ -18,6 +16,9 @@ namespace penguine
 
 		void Start();
 		void Update();
+		void ResetClock();
+
+		sf::Time GetLastUpdate();
 
 		float GetTimeInSeconds();
 		float GetTimeInMicroSeconds();

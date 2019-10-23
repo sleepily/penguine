@@ -4,37 +4,18 @@
 #include "penguine/Engine.h"
 #include "penguine/SpriteRenderer.h"
 
-using namespace penguine;
-
 int main()
 {
-	/*
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(80.f);
-	shape.setFillColor(sf::Color::Green);
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-		window.clear();
-		window.draw(shape);
-		window.display();
-	*/
-
+	// Replace this with XML reading
 	penguine::Scene* scene = new penguine::Scene();
 
 	penguine::GameObject* go = new penguine::GameObject();
 
 	scene->AddGameObject(go);
 
-	go->AddComponent(new SpriteRenderer());
+	go->AddComponent(new penguine::SpriteRenderer());
 
+	// Engine
 	penguine::Engine engine(scene);
 
 	engine.Start();
