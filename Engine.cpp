@@ -1,14 +1,12 @@
 #include <iostream>
 #include <string>
+#include "penguine/SystemSettings.h"
 #include "penguine/Engine.h"
 
 namespace penguine
 {
 	Engine::Engine()
 	{
-		m_TargetFPS = 60.0f;
-		m_TargetInputPolls = 10;
-
 		m_Event = new sf::Event();
 		m_Time = new GameTime();
 
@@ -32,7 +30,7 @@ namespace penguine
 	void Engine::Start()
 	{
 		for (Scene* scene : m_Scenes)
-			scene->engine = this;
+			scene->SetEngine(this);;
 
 		if (m_Scenes.size() == 0)
 		{
@@ -66,6 +64,8 @@ namespace penguine
 	{
 		uint inputPolls = 0;
 
+		std::cout << system::TARGET_FPS << std::endl;
+
 		while (m_Graphics->GetWindow()->isOpen())
 		{
 			m_Time->ResetClock();
@@ -73,21 +73,22 @@ namespace penguine
 			Input();
 
 			// Prevent rendering too fast using target FPS
-			float fpsDelay = 1.0f / m_TargetFPS;
+			float fpsDelay = 1.0f / system::TARGET_FPS;
 
 			if (m_Time->GetTimeInSeconds() < m_Time->GetLastUpdate().asSeconds() + fpsDelay)
 			{
-				sf::sleep(sf::microseconds((int)(fpsDelay / m_TargetInputPolls * 1000000.0f)));
+				sf::sleep(sf::microseconds((int)(fpsDelay / system::TARGET_POLLS * 1000000.0f)));
 				inputPolls++;
 				continue;
 			}
 
 			float fps = 1.0f / m_Time->GetDeltaTime();
+
 #if PENGUINE_DEBUG
 			std::cout << std::endl << "Time: " << m_Time->GetTimeInSeconds() << " s" << std::endl;
 			std::cout << "Delta Time: " << m_Time->GetDeltaTime() << " s" << std::endl;
 			std::cout << "FPS: " << fps << std::endl;
-			std::cout << "Input Polls: " << inputPolls << std::endl << std::endl;
+			std::cout << "Input Polls: " << system::TARGET_POLLS << std::endl << std::endl;
 #endif
 
 			inputPolls = 0;
@@ -101,6 +102,10 @@ namespace penguine
 	{
 		sf::Clock inputClock;
 
+#ifdef PENGUINE_DEBUG
+		std::cout << "Starting Input Poll..." << std::endl;
+#endif
+
 		m_Event = new sf::Event();
 
 		while (m_Graphics->GetWindow()->pollEvent(*m_Event))
@@ -110,6 +115,10 @@ namespace penguine
 			if (m_Event->type == sf::Event::Closed)
 				m_Graphics->GetWindow()->close();
 		}
+
+#ifdef PENGUINE_DEBUG
+		std::cout << "Finished Input Poll." << std::endl;
+#endif
 
 		return inputClock.getElapsedTime().asSeconds();
 	}
@@ -137,5 +146,8 @@ namespace penguine
 		}
 
 		m_Graphics->GetWindow()->display();
+
+
+		std::cout << "Finished Render." << std::endl << std::endl;
 	}
 }

@@ -9,7 +9,7 @@ namespace penguine
 
 	Component::~Component()
 	{
-
+		
 	}
 
 	void Component::Update()

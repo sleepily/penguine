@@ -47,6 +47,10 @@ namespace penguine
 
 	void GameObject::SetEngine(Engine* engine)
 	{
+#ifdef PENGUINE_DEBUG
+		std::cout << "Set GameObject " + m_Name +" to main engine" << std::endl;
+#endif
+
 		this->engine = engine;
 
 		for (Component* component : *m_Components)

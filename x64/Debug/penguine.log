@@ -1,15 +1,2 @@
-﻿  Component.cpp
-  Engine.cpp
-  GameObject.cpp
-  Graphics.cpp
-  PenguineObject.cpp
-  Scene.cpp
-  SpriteRenderer.cpp
-  Time.cpp
-X:\Work\Uni\Game Programming\penguine\penguine\Time.cpp(25,54): warning C4244: '=': conversion from 'sf::Int64' to 'float', possible loss of data
-  Transform.cpp
-  main.cpp
-  Generating Code...
-X:\Work\Uni\Game Programming\penguine\penguine\Time.cpp(41,39): warning C4244: 'return': conversion from 'sf::Int64' to 'float', possible loss of data
-X:\Work\Uni\Game Programming\penguine\penguine\Graphics.cpp(12): warning C4717: 'penguine::Graphics::Graphics': recursive on all control paths, function will cause runtime stack overflow
+﻿  Scene.cpp
   penguine.vcxproj -> X:\Work\Uni\Game Programming\penguine\x64\Debug\penguine.exe

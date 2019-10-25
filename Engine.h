@@ -19,9 +19,6 @@ namespace penguine
 
 		GameTime* m_Time;
 
-		float m_TargetFPS;
-		uint m_TargetInputPolls;
-
 		float Input();
 		void Update(float deltaTimeInSeconds);
 		void Render();

@@ -98,5 +98,8 @@
     <ClInclude Include="PenguineObject.h">
       <Filter>Header Files\penguine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="SystemSettings.h">
+      <Filter>Header Files\penguine\Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
