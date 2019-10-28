@@ -147,6 +147,7 @@
     <ClCompile Include="PenguineObject.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
@@ -160,6 +161,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SystemSettings.h" />
+    <ClInclude Include="TextBox.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace penguine
 		m_Event = new sf::Event();
 		m_Time = new GameTime();
 
-		m_Graphics = new Graphics(sf::Vector2u(400, 400));
+		m_Graphics = new Graphics(sf::Vector2u(800, 600));
 	}
 	Engine::Engine(Scene* startScene)
 	{

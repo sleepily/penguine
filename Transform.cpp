@@ -14,4 +14,8 @@ namespace penguine
 	{
 
 	}
+	sf::Vector2f* Transform::position2D()
+	{
+		return new sf::Vector2f(position->x, position->y);
+	}
 }

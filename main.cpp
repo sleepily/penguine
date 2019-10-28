@@ -3,6 +3,7 @@
 #include "penguine/GameObject.h"
 #include "penguine/Engine.h"
 #include "penguine/SpriteRenderer.h"
+#include "penguine/TextBox.h"
 
 int main()
 {
@@ -15,7 +16,13 @@ int main()
 
 	scene->AddGameObject(go);
 
-	go->AddComponent(new penguine::SpriteRenderer());
+	// go->AddComponent(new penguine::SpriteRenderer());
+
+	penguine::TextBox* textBox = new penguine::TextBox();
+	textBox->SetString("This is a test Text Box.");
+	go->AddComponent(textBox);
+
+	go->GetTransform()->position = new sf::Vector3f(30, 30, 0);
 
 	engine->AddScene(scene);
 

@@ -13,5 +13,7 @@ namespace penguine
 		sf::Vector3f* position;
 		sf::Vector3f* rotation;
 		sf::Vector3f* scale;
+
+		sf::Vector2f* position2D();
 	};
 }
