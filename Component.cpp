@@ -4,7 +4,7 @@ namespace penguine
 {
 	Component::Component()
 	{
-		m_Name = "DefaultComponent";
+		m_Name = "Default Component";
 	}
 
 	Component::~Component()

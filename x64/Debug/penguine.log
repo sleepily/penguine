@@ -1,2 +1,20 @@
-﻿  Engine.cpp
+﻿  main.cpp
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,151): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,151): warning C4244:         with
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,151): warning C4244:         [
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,151): warning C4244:             T=unsigned int
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,151): warning C4244:         ]
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,151): warning C4244:         and
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,151): warning C4244:         [
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,151): warning C4244:             T=float
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,151): warning C4244:         ]
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,98): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,98): warning C4244:         with
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,98): warning C4244:         [
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,98): warning C4244:             T=unsigned int
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,98): warning C4244:         ]
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,98): warning C4244:         and
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,98): warning C4244:         [
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,98): warning C4244:             T=float
+X:\Work\Uni\Game Programming\penguine\penguine\main.cpp(34,98): warning C4244:         ]
   penguine.vcxproj -> X:\Work\Uni\Game Programming\penguine\x64\Debug\penguine.exe

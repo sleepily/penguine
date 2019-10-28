@@ -4,9 +4,11 @@
 #include "penguine/GameObject.h"
 #include "penguine/Component.h"
 #include "penguine/Scene.h"
+#include "penguine/Transform.h"
 
 namespace penguine
 {
+	class Transform;
 	class Scene;
 	class Component;
 
@@ -14,8 +16,6 @@ namespace penguine
 	{
 		m_Name = "Default GameObject";
 		m_Transform = new Transform();
-		m_Transform->position = new sf::Vector3f();
-		m_Transform->rotation = new sf::Vector3f();
 
 		m_Scene = NULL;
 		m_Components = new std::vector<Component*>();
@@ -25,8 +25,6 @@ namespace penguine
 	{
 		m_Name = "Default GameObject";
 		m_Transform = new Transform();
-		m_Transform->position = new sf::Vector3f();
-		m_Transform->rotation = new sf::Vector3f();
 
 		m_Components = new std::vector<Component*>();
 

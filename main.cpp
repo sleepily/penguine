@@ -4,6 +4,8 @@
 #include "penguine/Engine.h"
 #include "penguine/SpriteRenderer.h"
 #include "penguine/TextBox.h"
+#include "penguine/Moveable.h"
+#include "penguine/Transform.h"
 
 int main()
 {
@@ -22,7 +24,14 @@ int main()
 	textBox->SetString("This is a test Text Box.");
 	go->AddComponent(textBox);
 
-	go->GetTransform()->position = new sf::Vector3f(30, 30, 0);
+	penguine::Moveable* moveable = new penguine::Moveable();
+	moveable->movementType = penguine::Moveable::MovementType::BOUNCE;
+	moveable->amplitude = 1.0f;
+	moveable->speed = 6.28f;
+
+	go->AddComponent(moveable);
+
+	go->GetTransform()->position = new sf::Vector3f(engine->GetGraphics()->GetWindow()->getSize().x / 3, engine->GetGraphics()->GetWindow()->getSize().y / 2, 0);
 
 	engine->AddScene(scene);
 

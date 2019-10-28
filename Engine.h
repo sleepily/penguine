@@ -33,6 +33,7 @@ namespace penguine
 		void Start();
 
 		Graphics* GetGraphics();
+		GameTime* GetTime();
 
 		Engine* AddScene(Scene* scene);
 		std::vector<Scene*> GetScenes();

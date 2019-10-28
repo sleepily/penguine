@@ -21,6 +21,9 @@ namespace penguine
 
 	void SpriteRenderer::Update()
 	{
+		if (!m_IsEnabled)
+			return;
+
 		sf::Vector3f* goPosition = m_GameObject->GetTransform()->position;
 		sf::Vector2f spritePosition(goPosition->x, goPosition->y);
 		// TODO: Set Sprite origin to half width and half height
@@ -29,7 +32,15 @@ namespace penguine
 
 	void SpriteRenderer::Render()
 	{
+		if (!m_IsEnabled)
+			return;
+
 		engine->GetGraphics()->GetWindow()->draw(*m_Sprite);
+	}
+
+	std::string SpriteRenderer::ToString()
+	{
+		return m_Name;
 	}
 
 	void SpriteRenderer::SetSprite(sf::Sprite* sprite)

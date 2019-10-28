@@ -46,6 +46,11 @@ namespace penguine
 		return m_Graphics;
 	}
 
+	GameTime* Engine::GetTime()
+	{
+		return m_Time;
+	}
+
 	Engine* Engine::AddScene(Scene* scene)
 	{
 		scene->SetEngine(this);

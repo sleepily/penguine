@@ -23,5 +23,7 @@ namespace penguine
 
 		void SetString(std::string string);
 		std::string GetString();
+
+		virtual std::string ToString();
 	};
 }

@@ -75,6 +75,9 @@
     <ClCompile Include="TextBox.cpp">
       <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Moveable.cpp">
+      <Filter>Source Files\penguine\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -111,6 +114,9 @@
       <Filter>Header Files\penguine\Core</Filter>
     </ClInclude>
     <ClInclude Include="TextBox.h">
+      <Filter>Header Files\penguine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Moveable.h">
       <Filter>Header Files\penguine\Components</Filter>
     </ClInclude>
   </ItemGroup>

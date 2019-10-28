@@ -18,6 +18,8 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
+		virtual std::string ToString();
+
 		void SetSprite(sf::Sprite* sprite);
 		sf::Sprite* GetSprite();
 	};

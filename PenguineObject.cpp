@@ -27,7 +27,7 @@ namespace penguine
 
 	std::string PenguineObject::ToString()
 	{
-		return m_Name;
+		return GetName();
 	}
 
 	std::string PenguineObject::GetName()

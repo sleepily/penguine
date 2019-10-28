@@ -15,5 +15,9 @@ namespace penguine
 		sf::Vector3f* scale;
 
 		sf::Vector2f* position2D();
+
+		sf::Vector3f* Translate(sf::Vector3f* delta);
+
+		std::string ToString();
 	};
 }
