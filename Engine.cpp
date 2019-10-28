@@ -62,7 +62,7 @@ namespace penguine
 	
 	void Engine::GameLoop()
 	{
-		uint inputPolls = 0;
+		uint updates = 0;
 
 		std::cout << system::TARGET_FPS << std::endl;
 
@@ -75,23 +75,26 @@ namespace penguine
 			// Prevent rendering too fast using target FPS
 			float fpsDelay = 1.0f / system::TARGET_FPS;
 
-			if (m_Time->GetTimeInSeconds() < m_Time->GetLastUpdate().asSeconds() + fpsDelay)
+			float timeUntilNextRender = (m_Time->GetLastUpdate().asSeconds() + fpsDelay) - m_Time->GetTimeInSeconds();
+
+			if (timeUntilNextRender > 0.0f)
 			{
-				sf::sleep(sf::microseconds((int)(fpsDelay / system::TARGET_POLLS * 1000000.0f)));
-				inputPolls++;
+				updates++;
+				std::cout << "Time until next render: " << timeUntilNextRender << " s" << std::endl;
+				sf::sleep(sf::microseconds((int)(fpsDelay / 10 * 1000000.0f)));
 				continue;
 			}
 
+#if PENGUINE_DEBUG
 			float fps = 1.0f / m_Time->GetDeltaTime();
 
-#if PENGUINE_DEBUG
 			std::cout << std::endl << "Time: " << m_Time->GetTimeInSeconds() << " s" << std::endl;
 			std::cout << "Delta Time: " << m_Time->GetDeltaTime() << " s" << std::endl;
 			std::cout << "FPS: " << fps << std::endl;
-			std::cout << "Input Polls: " << system::TARGET_POLLS << std::endl << std::endl;
+			std::cout << "Updates: " << system::TARGET_UPDATES << std::endl << std::endl;
 #endif
 
-			inputPolls = 0;
+			updates = 0;
 
 			Update(m_Time->GetDeltaTime());
 			Render();
@@ -142,12 +145,20 @@ namespace penguine
 
 		for (Scene* scene : m_Scenes)
 		{
+#if PENGUINE_DEBUG
+		std::cout << "Rendering " << scene->ToString() << "..." << std::endl;
+#endif
 			scene->Render();
+
+#if PENGUINE_DEBUG
+		std::cout << "Finished Rendering " << scene->ToString() << "." << std::endl;
+#endif
 		}
 
-		m_Graphics->GetWindow()->display();
-
-
+#if PENGUINE_DEBUG
 		std::cout << "Finished Render." << std::endl << std::endl;
+#endif
+
+		m_Graphics->GetWindow()->display();
 	}
 }
