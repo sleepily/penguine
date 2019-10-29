@@ -33,7 +33,7 @@ int main()
 	go->AddComponent(moveable);
 	go->AddComponent(spriteRenderer);
 
-	go->GetTransform()->position = new sf::Vector3f(engine->GetGraphics()->GetWindow()->getSize().x / 3, engine->GetGraphics()->GetWindow()->getSize().y / 2, 0);
+	go->GetTransform()->position = new sf::Vector3f(engine->GetGraphics()->GetWindow()->getSize().x / 3.0f, engine->GetGraphics()->GetWindow()->getSize().y / 2.0f, 0);
 
 	engine->AddScene(scene);
 

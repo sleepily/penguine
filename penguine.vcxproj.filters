@@ -81,6 +81,9 @@
     <ClCompile Include="Moveable.cpp">
       <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
+    <ClCompile Include="XML.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -133,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="rapidxml_utils.hpp">
       <Filter>Header Files\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSource.h">
+      <Filter>Header Files\penguine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="XML.h">
+      <Filter>Header Files\penguine\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

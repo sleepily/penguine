@@ -83,7 +83,7 @@ namespace penguine
 			{
 				updates++;
 				std::cout << "Time until next render: " << timeUntilNextRender << " s" << std::endl;
-				sf::sleep(sf::microseconds((int)(fpsDelay / 10 * 1000000.0f)));
+				sf::sleep(sf::microseconds((int)(fpsDelay / 10.0f * 1000000.0f)));
 				continue;
 			}
 

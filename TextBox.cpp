@@ -8,7 +8,7 @@ namespace penguine
 	{
 		m_Dimensions = new sf::Vector2u(100, 100);
 		m_Font = new sf::Font();
-		m_Font->loadFromFile("assets/fonts/DEADCRT.ttf");
+		m_Font->loadFromFile("assets1/fonts/DEADCRT.ttf");
 		m_String = "";
 		m_IsEnabled = true;
 
