@@ -16,10 +16,6 @@ namespace penguine
 	{
 		Engine();
 		AddScene(startScene);
-
-#if PENGUINE_DEBUG
-		std::cout << "\tStarting Penguine with scene " << startScene->GetName() << std::endl << std::endl;
-#endif
 	}
 
 	Engine::~Engine()
@@ -29,9 +25,6 @@ namespace penguine
 
 	void Engine::Start()
 	{
-		for (Scene* scene : m_Scenes)
-			scene->SetEngine(this);;
-
 		if (m_Scenes.size() == 0)
 		{
 			std::cout << "No scene loaded! Please add Scenes using engine->AddScene(). Aborting..." << std::endl;
@@ -53,6 +46,9 @@ namespace penguine
 
 	Engine* Engine::AddScene(Scene* scene)
 	{
+#if PENGUINE_DEBUG
+		std::cout << "Adding Scene " << scene->GetName() << "..." << std::endl;
+#endif
 		scene->SetEngine(this);
 
 		m_Scenes.push_back(scene);
@@ -69,13 +65,14 @@ namespace penguine
 	{
 		uint updates = 0;
 
-		std::cout << system::TARGET_FPS << std::endl;
+#ifdef PENGUINE_DEBUG
+		std::cout << "Target FPS: " << system::TARGET_FPS << std::endl;
+		std::cout << "Starting Game Loop." << std::endl << std::endl;
+#endif // PENGUINE_DEBUG
 
 		while (m_Graphics->GetWindow()->isOpen())
 		{
 			m_Time->ResetClock();
-
-			Input();
 
 			// Prevent rendering too fast using target FPS
 			float fpsDelay = 1.0f / system::TARGET_FPS;
@@ -101,6 +98,7 @@ namespace penguine
 
 			updates = 0;
 
+			Input();
 			Update(m_Time->GetDeltaTime());
 			Render();
 		}
@@ -136,12 +134,11 @@ namespace penguine
 		m_Time->Update();
 
 		for (Scene* scene : m_Scenes)
-		{
-#if PENGUINE_DEBUG
-			std::cout << scene->ToString() << std::endl;
-#endif
 			scene->Update();
-		}
+
+#if PENGUINE_DEBUG
+		std::cout << "Finished Update." << std::endl << std::endl;
+#endif
 	}
 
 	void Engine::Render()
@@ -149,16 +146,7 @@ namespace penguine
 		m_Graphics->GetWindow()->clear();
 
 		for (Scene* scene : m_Scenes)
-		{
-#if PENGUINE_DEBUG
-		std::cout << "Rendering " << scene->ToString() << "..." << std::endl;
-#endif
 			scene->Render();
-
-#if PENGUINE_DEBUG
-		std::cout << "Finished Rendering " << scene->ToString() << "." << std::endl;
-#endif
-		}
 
 #if PENGUINE_DEBUG
 		std::cout << "Finished Render." << std::endl << std::endl;

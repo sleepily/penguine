@@ -19,18 +19,19 @@ int main()
 
 	scene->AddGameObject(go);
 
-	// go->AddComponent(new penguine::SpriteRenderer());
-
 	penguine::TextBox* textBox = new penguine::TextBox();
 	textBox->SetString("This is a test Text Box.");
-	go->AddComponent(textBox);
 
 	penguine::Moveable* moveable = new penguine::Moveable();
-	moveable->movementType = penguine::Moveable::MovementType::BOUNCE_V;
+	moveable->movementType = penguine::Moveable::MovementType::ORBIT;
 	moveable->amplitude = 1.0f;
 	moveable->speed = 6.28f;
 
+	penguine::SpriteRenderer* spriteRenderer = new penguine::SpriteRenderer();
+
+	// go->AddComponent(textBox);
 	go->AddComponent(moveable);
+	go->AddComponent(spriteRenderer);
 
 	go->GetTransform()->position = new sf::Vector3f(engine->GetGraphics()->GetWindow()->getSize().x / 3, engine->GetGraphics()->GetWindow()->getSize().y / 2, 0);
 

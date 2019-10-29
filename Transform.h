@@ -6,6 +6,9 @@ namespace penguine
 {
 	class Transform
 	{
+	private:
+		std::string m_Name;
+
 	public:
 		Transform();
 		virtual ~Transform();
@@ -15,6 +18,8 @@ namespace penguine
 		sf::Vector3f* scale;
 
 		sf::Vector2f* position2D();
+
+		virtual void Update();
 
 		sf::Vector3f* Translate(sf::Vector3f* delta);
 

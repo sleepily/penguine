@@ -23,10 +23,8 @@ namespace penguine
 
 	void Moveable::Update()
 	{
-		/*
 		if (!m_IsEnabled)
 			return;
-		*/
 
 		float time = engine->GetTime()->GetTimeInSeconds();
 
@@ -50,9 +48,16 @@ namespace penguine
 		}
 
 		m_GameObject->GetTransform()->Translate(m_MovementDelta);
+
+#ifdef PENGUINE_DEBUG
+		std::cout << "Updated " << ToString() << "..." << std::endl;
+		std::cout << "\tMovement Delta: {" << std::to_string(m_MovementDelta->x) + ", " << std::to_string(m_MovementDelta->y) << "} " << std::endl;
+#endif // PENGUINE_DEBUG
+
 	}
+
 	std::string Moveable::ToString()
 	{
-		return m_Name + " Movement Delta: {" + std::to_string(m_MovementDelta->x) + ", " + std::to_string(m_MovementDelta->y) + "} ";
+		return m_Name;
 	}
 }

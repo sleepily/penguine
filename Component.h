@@ -10,7 +10,7 @@ namespace penguine
 	class Component: public PenguineObject
 	{
 	protected:
-		bool m_IsEnabled;
+		bool m_IsEnabled = true;
 
 		GameObject* m_GameObject;
 

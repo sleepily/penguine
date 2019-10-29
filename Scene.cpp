@@ -44,7 +44,7 @@ namespace penguine
 	void Scene::SetEngine(Engine* engine)
 	{
 #ifdef PENGUINE_DEBUG
-		std::cout << "Set Scene Engine to main engine" << std::endl;
+		std::cout << "Setting Scene Engine..." << std::endl;
 #endif
 		this->engine = engine;
 

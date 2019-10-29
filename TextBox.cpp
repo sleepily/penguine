@@ -28,17 +28,17 @@ namespace penguine
 
 		m_Text->setFont(*m_Font);
 
-#ifdef PENGUINE_DEBUG
-		std::cout << "TextBox Component: " << std::endl;
-		std::cout << m_GameObject->GetTransform()->ToString() << std::endl;
-#endif // PENGUINE_DEBUG
-
 		m_Text->setPosition(*m_GameObject->GetTransform()->position2D());
 		m_Text->setCharacterSize(18);
 		m_Text->setFillColor(sf::Color(0, 255, 0));
-		m_Text->setOutlineThickness(2.0f);
+		m_Text->setOutlineThickness(1.0f);
+		m_Text->setOutlineColor(sf::Color::Red);
 
 		m_Text->setString(m_String);
+
+#ifdef PENGUINE_DEBUG
+		std::cout << "Updated " << m_Name << "..." << std::endl;
+#endif // PENGUINE_DEBUG
 	}
 
 	void TextBox::Render()

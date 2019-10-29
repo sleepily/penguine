@@ -37,18 +37,6 @@ namespace penguine
 
 	}
 
-	void GameObject::Update()
-	{
-		for (Component* component : *m_Components)
-			component->Update();
-	}
-
-	void GameObject::Render()
-	{
-		for (Component* component : *m_Components)
-			component->Render();
-	}
-
 	void GameObject::SetEngine(Engine* engine)
 	{
 #ifdef PENGUINE_DEBUG
@@ -59,6 +47,27 @@ namespace penguine
 
 		for (Component* component : *m_Components)
 			component->engine = engine;
+	}
+
+	void GameObject::Update()
+	{
+#ifdef PENGUINE_DEBUG
+		std::cout << "Updating GameObject: " << std::endl;
+		std::cout << ToString() << std::endl;
+#endif
+
+		for (Component* component : *m_Components)
+			component->Update();
+	}
+
+	void GameObject::Render()
+	{
+#ifdef PENGUINE_DEBUG
+		std::cout << "Rendering GameObject: " << m_Name << "..." << std::endl;
+#endif
+
+		for (Component* component : *m_Components)
+			component->Render();
 	}
 
 	Transform* GameObject::GetTransform()
@@ -78,7 +87,7 @@ namespace penguine
 		m_Components->push_back(component);
 
 #if PENGUINE_DEBUG
-		std::cout << "Added component " << component->GetName() << " to " << m_Name << ". " << std::endl << std::endl;
+		std::cout << "Added Component " << component->GetName() << " to " << m_Name << ". " << std::endl;
 #endif
 
 		return component;
@@ -89,8 +98,8 @@ namespace penguine
 		std::string outputString;
 		size_t componentCount = m_Components->size();
 
-		outputString += "GameObject: " + m_Name + "\n";
-		outputString += "Components: " + std::to_string(componentCount) + ";\n";
+		outputString += "Name: \t" + m_Name + "\n";
+		outputString += "Components: \t" + std::to_string(componentCount) + ";\n";
 
 		for (Component* component : *m_Components)
 			outputString += "\t" + component->ToString() + "\n";
