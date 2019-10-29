@@ -160,6 +160,10 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Moveable.h" />
     <ClInclude Include="PenguineObject.h" />
+    <ClInclude Include="rapidxml.hpp" />
+    <ClInclude Include="rapidxml_iterators.hpp" />
+    <ClInclude Include="rapidxml_print.hpp" />
+    <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SystemSettings.h" />

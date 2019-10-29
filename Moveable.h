@@ -18,7 +18,8 @@ namespace penguine
 		enum class MovementType
 		{
 			STATIC,
-			BOUNCE,
+			BOUNCE_H,
+			BOUNCE_V,
 			ORBIT
 		};
 

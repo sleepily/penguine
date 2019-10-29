@@ -6,6 +6,7 @@
 #include "penguine/TextBox.h"
 #include "penguine/Moveable.h"
 #include "penguine/Transform.h"
+#include "rapidxml.hpp"
 
 int main()
 {
@@ -25,7 +26,7 @@ int main()
 	go->AddComponent(textBox);
 
 	penguine::Moveable* moveable = new penguine::Moveable();
-	moveable->movementType = penguine::Moveable::MovementType::BOUNCE;
+	moveable->movementType = penguine::Moveable::MovementType::BOUNCE_V;
 	moveable->amplitude = 1.0f;
 	moveable->speed = 6.28f;
 

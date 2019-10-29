@@ -8,7 +8,7 @@ namespace penguine
 {
 	Moveable::Moveable()
 	{
-		movementType = MovementType::BOUNCE;
+		movementType = MovementType::BOUNCE_H;
 		m_MovementDelta = new sf::Vector3f();
 		amplitude = 1.0f;
 		speed = 1.0f;
@@ -35,8 +35,11 @@ namespace penguine
 		case MovementType::STATIC:
 			m_MovementDelta = new sf::Vector3f();
 			break;
-		case MovementType::BOUNCE:
+		case MovementType::BOUNCE_H:
 			m_MovementDelta->x = std::cos(time * speed) * amplitude * speed;
+			break;
+		case MovementType::BOUNCE_V:
+			m_MovementDelta->y = std::cos(time * speed) * amplitude * speed;
 			break;
 		case MovementType::ORBIT:
 			m_MovementDelta->x = std::cos(time * speed) * amplitude * speed;

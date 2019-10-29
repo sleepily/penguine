@@ -37,6 +37,9 @@
     <Filter Include="Header Files\penguine\GameObject">
       <UniqueIdentifier>{0c90042e-8ab6-4b79-bea2-c724ccfe7631}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\rapidxml">
+      <UniqueIdentifier>{56578b5a-2855-443b-874c-179f6fbfe4fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -118,6 +121,18 @@
     </ClInclude>
     <ClInclude Include="Moveable.h">
       <Filter>Header Files\penguine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Header Files\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_iterators.hpp">
+      <Filter>Header Files\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_print.hpp">
+      <Filter>Header Files\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_utils.hpp">
+      <Filter>Header Files\rapidxml</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
