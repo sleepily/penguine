@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
+#include <cctype>
+#include <algorithm>
 #include "XML.h"
 #include "rapidxml.hpp"
 
@@ -63,9 +65,23 @@ namespace penguine
 
 		for (rapidxml::xml_node<>* node = m_Node; node != NULL; node = node->next_sibling())
 		{
-			output += std::string(node->name()) + ": \n";
+			output += "\n<" + std::string(node->name()) + "> \n";
+
+			std::string nodeValueTrimmed = node->value();
+			nodeValueTrimmed.erase(std::remove_if(nodeValueTrimmed.begin(), nodeValueTrimmed.end(), std::isspace), nodeValueTrimmed.end());
+			nodeValueTrimmed.erase(std::remove_if(nodeValueTrimmed.begin(), nodeValueTrimmed.end(), std::isblank), nodeValueTrimmed.end());
+
+			if (!nodeValueTrimmed.empty())
+				output += "\t" + std::string(node->value()) + "\n\n";
+			else
+				output += "\t{ no value }\n\n";
+
+			output += "\t- - - - - - - -\n";
+
 			for (rapidxml::xml_attribute<>* pAttr = node->first_attribute(); pAttr != NULL; pAttr = pAttr->next_attribute())
-				output += "\t" + std::string(pAttr->name()) + " = " + std::string(pAttr->value()) + ",\n";
+				output += "\t" + std::string(pAttr->name()) + " = \"" + std::string(pAttr->value()) + "\"\n";
+
+			output += "\t- - - - - - - -\n";
 		}
 			
 		return output;

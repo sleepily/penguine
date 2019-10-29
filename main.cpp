@@ -28,7 +28,7 @@ int main()
 	textBox->SetString("This is a test Text Box.");
 
 	penguine::Moveable* moveable = new penguine::Moveable();
-	moveable->movementType = penguine::Moveable::MovementType::ORBIT;
+	moveable->movementType = penguine::Moveable::MovementType::BOUNCE_H;
 	moveable->amplitude = 1.0f;
 	moveable->speed = 6.28f;
 
