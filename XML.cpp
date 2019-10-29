@@ -6,6 +6,15 @@
 
 namespace penguine
 {
+	XML::XML(std::string path)
+	{
+		m_Node = new rapidxml::xml_node<>(rapidxml::node_type::node_document);
+		m_RootNode = new rapidxml::xml_node<>(rapidxml::node_type::node_document);
+
+		ReadFile(path);
+		Parse();
+	}
+	
 	void XML::ReadFile(std::string path)
 	{
 		std::ifstream inputFile(path, std::ios::binary);
@@ -16,33 +25,31 @@ namespace penguine
 		inputFile.seekg(0, std::ios::beg);
 
 		m_FileSize = fileSize;
+		m_FileName = path;
 
 		m_XMLContents = new char[fileSize + 1];
 		memset(m_XMLContents, 0, fileSize + 1);
 		inputFile.read(m_XMLContents, fileSize);
-		std::cout << m_XMLContents << std::endl;
+		// std::cout << m_XMLContents << std::endl;
 		inputFile.close();
 	}
 	
 	bool XML::Parse()
 	{
-		m_XMLDocument.parse<0>(m_XMLContents);
+		m_XMLDocument = new rapidxml::xml_document<>();
+		m_XMLDocument->parse<0>(m_XMLContents);
 
-		m_RootNode = m_XMLDocument.first_node();
-		m_Node = m_RootNode;
+		m_RootNode = m_XMLDocument->first_node();
+		m_Node = m_RootNode->first_node();
+
+		std::string temp = m_Node->name();
 
 		return true;
 	}
 
-	XML::XML(std::string path)
+	size_t XML::GetFileSize()
 	{
-		ReadFile(path);
-		Parse();
-	}
-
-	int XML::GetFileSize()
-	{
-		if (m_FileSize >= 0)
+		if (m_FileSize > 0)
 			return m_FileSize;
 
 		return 0;
@@ -50,12 +57,17 @@ namespace penguine
 	
 	std::string XML::ToString()
 	{
-#ifdef PENGUINE_DEBUG
-#endif // PENGUINE_DEBUG
+		std::string output;
 
-		
+		output += "XML File " + m_FileName + ": \n\n";
 
-
-		return std::string();
+		for (rapidxml::xml_node<>* node = m_Node; node != NULL; node = node->next_sibling())
+		{
+			output += std::string(node->name()) + ": \n";
+			for (rapidxml::xml_attribute<>* pAttr = node->first_attribute(); pAttr != NULL; pAttr = pAttr->next_attribute())
+				output += "\t" + std::string(pAttr->name()) + " = " + std::string(pAttr->value()) + ",\n";
+		}
+			
+		return output;
 	}
 }

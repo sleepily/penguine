@@ -6,11 +6,16 @@
 #include "penguine/TextBox.h"
 #include "penguine/Moveable.h"
 #include "penguine/Transform.h"
+#include "penguine/XML.h"
 #include "rapidxml.hpp"
 
 int main()
 {
 	penguine::Engine* engine = new penguine::Engine();
+
+	penguine::XML* xml = new penguine::XML("assets/data.xml");
+
+	std::cout << xml->ToString() << std::endl;
 
 	// TODO: Replace this with XML reading
 	penguine::Scene* scene = new penguine::Scene();

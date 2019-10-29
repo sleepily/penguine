@@ -82,7 +82,7 @@
       <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
     <ClCompile Include="XML.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\penguine\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

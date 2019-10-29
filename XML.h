@@ -8,14 +8,15 @@ namespace penguine
 	class XML
 	{
 	private:
-		rapidxml::xml_document<> m_XMLDocument;
+		rapidxml::xml_document<>* m_XMLDocument;
 		rapidxml::xml_attribute<>* m_XMLAttribute;
 		char* m_XMLContents;
+		std::string m_FileName;
 
 		rapidxml::xml_node<>* m_RootNode;
 		rapidxml::xml_node<>* m_Node;
 
-		int m_FileSize = -1;
+		size_t m_FileSize = 0;
 
 		void ReadFile(std::string path);
 		bool Parse();
@@ -23,8 +24,8 @@ namespace penguine
 		XML(std::string path);
 		~XML();
 
-		int GetFileSize();
+		size_t GetFileSize();
 
-		static std::string ToString();
+		std::string ToString();
 	};
 }
