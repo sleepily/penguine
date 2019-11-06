@@ -7,11 +7,13 @@ typedef sf::Vector3<bool>	Vector3b;
 
 namespace penguine
 {
+	class Mouse;
+
 	class Input: public PenguineObject
 	{
 		sf::Time m_LastPollTime, m_CurrentPollTime;
 
-		penguine::Mouse m_Mouse;
+		penguine::Mouse* m_Mouse;
 
 		void ConvertMouseInstructions();
 
@@ -29,7 +31,7 @@ namespace penguine
 		bool GetMouseHold();
 		bool GetMouseRelease();
 
-		sf::Vector2u GetMousePosition();
+		sf::Vector2i GetMousePosition();
 		sf::Vector2f GetMouseVecolity();
 		sf::Vector2f GetMouseScrollDelta();
 	};
