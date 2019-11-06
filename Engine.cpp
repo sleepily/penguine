@@ -21,7 +21,32 @@ namespace penguine
 
 	Engine::~Engine()
 	{
+#ifdef PENGUINE_DEBUG
+		std::cout << std::endl;
+		std::cout << "Shutting down..." << std::endl;
+		std::cout << "Calling destructors..." << std::endl;
+#endif // PENGUINE_DEBUG
 
+		for (Scene* scene : m_Scenes)
+		{
+			std::cout << std::endl;
+			std::cout << "Scene " << scene->GetName() << ": " << std::endl;
+			std::cout << scene->ToString() << std::endl;
+
+			for (GameObject* go : *scene->GetGameObjects())
+			{
+				for (Component* component : *go->GetComponents())
+					component->~Component();
+
+				go->~GameObject();
+			}
+
+			scene->~Scene();
+		}
+
+#ifdef PENGUINE_DEBUG
+		std::cout << "Finished shutting down." << std::endl;
+#endif // PENGUINE_DEBUG
 	}
 
 	void Engine::Start()

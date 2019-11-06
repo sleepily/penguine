@@ -10,6 +10,13 @@
 #include "penguine/XML.h"
 #include "rapidxml.hpp"
 
+/*
+TODO: move all header files to class factory
+TODO: fix XML reading/writing
+TODO: finish mouse input: buttons; relative position?
+TODO: add keyboard input
+*/
+
 int main()
 {
 	penguine::Engine* engine = new penguine::Engine();
@@ -43,15 +50,12 @@ int main()
 	// go->AddComponent(moveable);
 	go->AddComponent(spriteRenderer);
 	go->AddComponent(moveToMouse);
-
-	/*
-	// Set position to screen half
-	go->GetTransform()->position = new sf::Vector3f(engine->GetGraphics()->GetWindow()->getSize().x / 3.0f, engine->GetGraphics()->GetWindow()->getSize().y / 2.0f, 0);
-	*/
-
+	
 	engine->AddScene(scene);
 
 	engine->Start();
+
+	engine->~Engine();
 
 	return 0;
 }
