@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include "penguine/SystemSettings.h"
-#include "penguine/Engine.h"
+#include "SystemSettings.h"
+#include "Engine.h"
 
 namespace penguine
 {
@@ -29,9 +29,11 @@ namespace penguine
 
 		for (Scene* scene : m_Scenes)
 		{
+#ifdef PENGUINE_DEBUG
 			std::cout << std::endl;
 			std::cout << "Scene " << scene->GetName() << ": " << std::endl;
 			std::cout << scene->ToString() << std::endl;
+#endif // PENGUINE_DEBUG
 
 			for (GameObject* go : *scene->GetGameObjects())
 			{
@@ -79,7 +81,7 @@ namespace penguine
 	{
 #if PENGUINE_DEBUG
 		std::cout << "Adding Scene " << scene->GetName() << "..." << std::endl;
-#endif
+#endif // PENGUINE_DEBUG
 		scene->SetEngine(this);
 
 		m_Scenes.push_back(scene);
@@ -113,7 +115,11 @@ namespace penguine
 			if (timeUntilNextRender > 0.0f)
 			{
 				updates++;
+
+#ifdef PENGUINE_DEBUG
 				std::cout << "Time until next Update: " << timeUntilNextRender << " s" << std::endl;
+#endif
+
 				sf::sleep(sf::microseconds((int)(fpsDelay / 10.0f * 1000000.0f)));
 				continue;
 			}

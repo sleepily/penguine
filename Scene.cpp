@@ -1,5 +1,5 @@
 #include <iostream>
-#include "penguine/Scene.h"
+#include "Scene.h"
 
 namespace penguine
 {

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <SFML/Graphics.hpp>
-#include "penguine/Moveable.h"
-#include "penguine/Engine.h"
+#include "Moveable.h"
+#include "Engine.h"
 
 namespace penguine
 {

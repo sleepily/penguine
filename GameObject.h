@@ -2,9 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <list>
 #include <string>
-#include "penguine/Component.h"
-#include "penguine/PenguineObject.h"
-#include "penguine/Transform.h"
+#include "Component.h"
+#include "PenguineObject.h"
+#include "Transform.h"
 
 namespace penguine
 {

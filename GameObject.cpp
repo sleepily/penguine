@@ -1,10 +1,10 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "penguine/GameObject.h"
-#include "penguine/Component.h"
-#include "penguine/Scene.h"
-#include "penguine/Transform.h"
+#include "GameObject.h"
+#include "Component.h"
+#include "Scene.h"
+#include "Transform.h"
 
 namespace penguine
 {

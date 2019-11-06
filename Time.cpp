@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "penguine/Time.h"
+#include "Time.h"
 
 namespace penguine
 {

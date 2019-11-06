@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "penguine/Input.h"
-#include "penguine/Mouse.h"
+#include "Input.h"
+#include "Mouse.h"
 
 namespace penguine
 {

@@ -1,4 +1,4 @@
-#include "penguine/Engine.h"
+#include "Engine.h"
 #include "PenguineObject.h"
 
 namespace penguine

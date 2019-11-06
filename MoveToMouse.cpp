@@ -1,6 +1,6 @@
-#include "penguine/MoveToMouse.h"
-#include "penguine/Engine.h"
-#include "penguine/Mouse.h"
+#include "MoveToMouse.h"
+#include "Engine.h"
+#include "Mouse.h"
 
 penguine::MoveToMouse::MoveToMouse()
 {

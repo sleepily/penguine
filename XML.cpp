@@ -49,7 +49,9 @@ namespace penguine
 		m_XMLContents = new char[fileSize + 1];
 		memset(m_XMLContents, 0, fileSize + 1);
 		inputFile.read(m_XMLContents, fileSize);
-		std::cout << m_XMLContents << std::endl;
+
+		// std::cout << m_XMLContents << std::endl;
+
 		inputFile.close();
 	}
 	

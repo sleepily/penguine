@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "TextBox.h"
-#include "penguine/Engine.h"
+#include "Engine.h"
 
 namespace penguine
 {

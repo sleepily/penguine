@@ -1,4 +1,4 @@
-#include "penguine/Component.h"
+#include "Component.h"
 
 namespace penguine
 {

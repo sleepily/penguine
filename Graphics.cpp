@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "penguine/Graphics.h"
+#include "Graphics.h"
 
 typedef unsigned int	uint;
 

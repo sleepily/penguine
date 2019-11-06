@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include "penguine/PenguineObject.h"
-#include "penguine/GameObject.h"
+#include "PenguineObject.h"
+#include "GameObject.h"
 
 namespace penguine
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "penguine/PenguineObject.h"
-#include "penguine/Mouse.h"
+#include "PenguineObject.h"
+#include "Mouse.h"
 
 typedef sf::Vector3<bool>	Vector3b;
 

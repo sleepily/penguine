@@ -34,3 +34,6 @@
 # Example Assets
 assets/*
 assets1/*
+
+# Build Folders
+x64/*

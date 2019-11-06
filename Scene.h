@@ -1,13 +1,14 @@
 #pragma once
 #include <string>
-#include "penguine/GameObject.h"
-#include "penguine/PenguineObject.h"
-typedef unsigned int	uint;
+#include "GameObject.h"
+#include "PenguineObject.h"
 
 class GameObject;
 
 namespace penguine
 {
+	typedef unsigned int	uint;
+
 	class Scene: public PenguineObject
 	{
 	private:

@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "penguine/Input.h"
+#include "Input.h"
 
 namespace penguine
 {

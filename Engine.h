@@ -1,9 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "penguine/Scene.h"
-#include "penguine/Graphics.h"
-#include "penguine/Input.h"
-#include "penguine/Time.h"
+#include "Scene.h"
+#include "Graphics.h"
+#include "Input.h"
+#include "Time.h"
 
 typedef unsigned int	uint;
 
