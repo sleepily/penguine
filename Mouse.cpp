@@ -1,7 +1,12 @@
+#include <SFML/Graphics.hpp>
 #include "Mouse.h"
 
-penguine::Mouse::Mouse()
+namespace penguine
 {
-	m_Position = sf::Vector2i();
-	m_ScrollDelta, m_Velocity = sf::Vector2f();
+	Mouse::Mouse()
+	{
+		m_Position = new sf::Vector2i();
+		m_ScrollDelta = new sf::Vector2f();
+		m_Velocity = new sf::Vector2f();
+	}
 }

@@ -45,6 +45,11 @@ namespace penguine
 		return m_Time;
 	}
 
+	penguine::Input* Engine::GetInput()
+	{
+		return m_Input;
+	}
+
 	Engine* Engine::AddScene(Scene* scene)
 	{
 #if PENGUINE_DEBUG
@@ -83,7 +88,7 @@ namespace penguine
 			if (timeUntilNextRender > 0.0f)
 			{
 				updates++;
-				std::cout << "Time until next render: " << timeUntilNextRender << " s" << std::endl;
+				std::cout << "Time until next Update: " << timeUntilNextRender << " s" << std::endl;
 				sf::sleep(sf::microseconds((int)(fpsDelay / 10.0f * 1000000.0f)));
 				continue;
 			}

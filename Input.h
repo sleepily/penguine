@@ -31,8 +31,8 @@ namespace penguine
 		bool GetMouseHold();
 		bool GetMouseRelease();
 
-		sf::Vector2i GetMousePosition();
-		sf::Vector2f GetMouseVecolity();
-		sf::Vector2f GetMouseScrollDelta();
+		sf::Vector2i* GetMousePosition();
+		sf::Vector2f* GetMouseVecolity();
+		sf::Vector2f* GetMouseScrollDelta();
 	};
 }

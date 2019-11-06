@@ -1,8 +1,7 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "penguine/Input.h"
 #include "penguine/Mouse.h"
-
-typedef sf::Vector3<bool>	Vector3b;
 
 namespace penguine
 {
@@ -28,22 +27,44 @@ namespace penguine
 
 	void Input::PollFromEvent(sf::Event event)
 	{
-		m_Mouse->m_ScrollDelta = sf::Vector2f();
+		m_Mouse->m_ScrollDelta = new sf::Vector2f();
 
 		switch (event.type)
 		{
 		case sf::Event::MouseWheelScrolled:
 
+			if (!m_Mouse->m_IsInWindow)
+				break;
+
 			if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
-				m_Mouse->m_ScrollDelta.y = event.mouseWheelScroll.delta;
+				m_Mouse->m_ScrollDelta->y = event.mouseWheelScroll.delta;
 			else if (event.mouseWheelScroll.wheel == sf::Mouse::HorizontalWheel)
-				m_Mouse->m_ScrollDelta.x = event.mouseWheelScroll.delta;
+				m_Mouse->m_ScrollDelta->x = event.mouseWheelScroll.delta;
 
 			break;
 
 		case sf::Event::MouseMoved:
 
-			m_Mouse->m_Position = sf::Mouse::getPosition();
+			if (!m_Mouse->m_IsInWindow)
+				break;
+
+			m_Mouse->m_Position->x = event.mouseMove.x;
+			m_Mouse->m_Position->y = event.mouseMove.y;
+
+			break;
+
+		case sf::Event::MouseLeft:
+
+			m_Mouse->m_IsInWindow = false;
+			// m_Mouse->m_Position = new sf::Vector2i();
+
+			break;
+
+		case sf::Event::MouseEntered:
+
+			m_Mouse->m_IsInWindow = true;
+			m_Mouse->m_Position->x = event.mouseMove.x;
+			m_Mouse->m_Position->y = event.mouseMove.y;
 
 			break;
 
@@ -70,17 +91,19 @@ namespace penguine
 		return m_Mouse->m_ButtonRelease;
 	}
 
-	sf::Vector2i Input::GetMousePosition()
+	sf::Vector2i* Input::GetMousePosition()
 	{
+		std::cout << "Mouse Position: " << m_Mouse->m_Position->x << "x, " << m_Mouse->m_Position->y << "y. " << std::endl;
+
 		return m_Mouse->m_Position;
 	}
 
-	sf::Vector2f Input::GetMouseVecolity()
+	sf::Vector2f* Input::GetMouseVecolity()
 	{
 		return m_Mouse->m_Velocity;
 	}
 
-	sf::Vector2f Input::GetMouseScrollDelta()
+	sf::Vector2f* Input::GetMouseScrollDelta()
 	{
 		return m_Mouse->m_ScrollDelta;
 	}
@@ -94,8 +117,6 @@ namespace penguine
 
 	void Input::ConvertMouseInstructions()
 	{
-		Vector3b output();
-
 		for (int i = 0; i < 3; i++)
 		{
 			// Reduce to m_Mouse->m_ButtonHold if mouse is m_Mouse->m_ButtonDown for the second time

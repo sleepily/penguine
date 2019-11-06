@@ -15,8 +15,8 @@ namespace penguine
 		std::vector<Scene*> m_Scenes;
 
 		Graphics* m_Graphics;
-		Input* m_Input;
-		GameTime* m_Time;
+		penguine::Input* m_Input;
+		penguine::GameTime* m_Time;
 
 		sf::Event* m_Event;
 
@@ -34,7 +34,8 @@ namespace penguine
 		void Start();
 
 		Graphics* GetGraphics();
-		GameTime* GetTime();
+		penguine::GameTime* GetTime();
+		penguine::Input* GetInput();
 
 		Engine* AddScene(Scene* scene);
 		std::vector<Scene*> GetScenes();

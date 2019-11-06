@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Moveable.cpp" />
+    <ClCompile Include="MoveToMouse.cpp" />
     <ClCompile Include="PenguineObject.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />

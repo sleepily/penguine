@@ -93,6 +93,9 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\penguine\Core\Input</Filter>
     </ClCompile>
+    <ClCompile Include="MoveToMouse.cpp">
+      <Filter>Source Files\penguine\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">

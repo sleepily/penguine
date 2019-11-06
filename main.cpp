@@ -3,6 +3,7 @@
 #include "penguine/GameObject.h"
 #include "penguine/Engine.h"
 #include "penguine/SpriteRenderer.h"
+#include "penguine/MoveToMouse.h"
 #include "penguine/TextBox.h"
 #include "penguine/Moveable.h"
 #include "penguine/Transform.h"
@@ -34,9 +35,12 @@ int main()
 
 	penguine::SpriteRenderer* spriteRenderer = new penguine::SpriteRenderer();
 
+	penguine::MoveToMouse* moveToMouse = new penguine::MoveToMouse();
+
 	go->AddComponent(textBox);
-	go->AddComponent(moveable);
+	// go->AddComponent(moveable);
 	go->AddComponent(spriteRenderer);
+	go->AddComponent(moveToMouse);
 
 	go->GetTransform()->position = new sf::Vector3f(engine->GetGraphics()->GetWindow()->getSize().x / 3.0f, engine->GetGraphics()->GetWindow()->getSize().y / 2.0f, 0);
 
