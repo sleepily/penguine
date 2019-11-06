@@ -7,7 +7,7 @@ namespace penguine
 	GameTime::GameTime()
 	{
 		m_Clock = m_DeltaClock = sf::Clock();
-		m_DeltaTimeMicro = 0.0f;
+		m_DeltaTimeMicro = 0;
 	}
 
 	void GameTime::Start()
@@ -22,7 +22,7 @@ namespace penguine
 
 	void GameTime::Update()
 	{
-		m_DeltaTimeMicro = m_AbsoluteTime.asMicroseconds() - m_LastUpdate.asMicroseconds();
+		m_DeltaTimeMicro = (float)(m_AbsoluteTime.asMicroseconds() - m_LastUpdate.asMicroseconds());
 		m_LastUpdate = m_AbsoluteTime;
 	}
 
@@ -38,7 +38,7 @@ namespace penguine
 
 	float GameTime::GetTimeInMicroSeconds()
 	{
-		return m_AbsoluteTime.asMicroseconds();
+		return (float)m_AbsoluteTime.asMicroseconds();
 	}
 
 	float GameTime::GetDeltaTime()
