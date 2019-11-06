@@ -1,2 +1,3 @@
-﻿  main.cpp
+﻿  Input.cpp
+X:\Work\Uni\Game Programming\penguine\penguine\Input.cpp(84,12): warning C4930: 'Vector3b output(void)': prototyped function not called (was a variable definition intended?)
   penguine.vcxproj -> X:\Work\Uni\Game Programming\penguine\x64\Debug\penguine.exe

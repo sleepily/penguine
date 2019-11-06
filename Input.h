@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "penguine/PenguineObject.h"
+#include "penguine/Mouse.h"
 
 typedef sf::Vector3<bool>	Vector3b;
 
@@ -9,11 +10,10 @@ namespace penguine
 	class Input: public PenguineObject
 	{
 		sf::Time m_LastPollTime, m_CurrentPollTime;
-		Vector3b m_MouseDown, m_MouseHold, m_PreviousMouseHold, m_MouseRelease;
 
-		sf::Mouse m_Mouse;
+		penguine::Mouse m_Mouse;
 
-		void ConvertMouseInstructions(Vector3b hold, Vector3b down);
+		void ConvertMouseInstructions();
 
 	public:
 		Input();
@@ -22,15 +22,15 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
+		void PollFromEvent(sf::Event event);
 		void ReadMouseButtons();
-		void CalculateMouseChanges();
 
-		Vector3b MouseDown();
-		Vector3b MouseHold();
-		Vector3b MouseRelease();
+		bool GetMouseDown();
+		bool GetMouseHold();
+		bool GetMouseRelease();
 
-		sf::Vector2u MousePosition;
-		sf::Vector2f MouseVecolity;
-		sf::Vector2f MouseScrollDelta;
+		sf::Vector2u GetMousePosition();
+		sf::Vector2f GetMouseVecolity();
+		sf::Vector2f GetMouseScrollDelta();
 	};
 }

@@ -8,6 +8,23 @@
 
 namespace penguine
 {
+	rapidxml::xml_node<>* XML::FindChildNode(rapidxml::xml_node<>* pNode, char* szName)
+	{
+		for (rapidxml::xml_node<>* pChild = pNode->first_node(); pChild != NULL; pChild = pChild->next_sibling()) {
+			if (strcmp(pChild->name(), szName) == 0) return pChild;
+		}
+		return NULL;
+	}
+
+	rapidxml::xml_attribute<>* XML::FindAttribute(rapidxml::xml_node<>* pNode, char* szName)
+	{
+		for (rapidxml::xml_attribute<>* pAttr = pNode->first_attribute(); pAttr != NULL; pAttr = pAttr->next_attribute())
+		{
+			if (strcmp(pAttr->name(), szName) == 0) return pAttr;
+		}
+		return NULL;
+	}
+
 	XML::XML(std::string path)
 	{
 		m_Node = new rapidxml::xml_node<>(rapidxml::node_type::node_document);
@@ -16,7 +33,7 @@ namespace penguine
 		ReadFile(path);
 		Parse();
 	}
-	
+
 	void XML::ReadFile(std::string path)
 	{
 		std::ifstream inputFile(path, std::ios::binary);
@@ -32,7 +49,7 @@ namespace penguine
 		m_XMLContents = new char[fileSize + 1];
 		memset(m_XMLContents, 0, fileSize + 1);
 		inputFile.read(m_XMLContents, fileSize);
-		// std::cout << m_XMLContents << std::endl;
+		std::cout << m_XMLContents << std::endl;
 		inputFile.close();
 	}
 	
@@ -63,27 +80,46 @@ namespace penguine
 
 		output += "XML File " + m_FileName + ": \n\n";
 
-		for (rapidxml::xml_node<>* node = m_Node; node != NULL; node = node->next_sibling())
-		{
-			output += "\n<" + std::string(node->name()) + "> \n";
+		output += ToStringRecursive(m_Node, 0);
+			
+		return output;
+	}
 
-			std::string nodeValueTrimmed = node->value();
+	std::string XML::ToStringRecursive(rapidxml::xml_node<>* firstSibling, unsigned int level)
+	{
+		std::string output;
+
+		std::string t = "";
+
+		for (unsigned int i = 0; i < level; i++)
+			t += "\t";
+
+		for (rapidxml::xml_node<>* siblingNode = firstSibling; siblingNode != NULL; siblingNode = siblingNode->next_sibling())
+		{
+			output += t + "\n<" + std::string(siblingNode->name()) + "> \n";
+
+			// Trim Name to filter out empty values
+			std::string nodeValueTrimmed = siblingNode->value();
 			nodeValueTrimmed.erase(std::remove_if(nodeValueTrimmed.begin(), nodeValueTrimmed.end(), std::isspace), nodeValueTrimmed.end());
 			nodeValueTrimmed.erase(std::remove_if(nodeValueTrimmed.begin(), nodeValueTrimmed.end(), std::isblank), nodeValueTrimmed.end());
 
+			// Print node value
 			if (!nodeValueTrimmed.empty())
-				output += "\t" + std::string(node->value()) + "\n\n";
+				output += t + "\t" + std::string(siblingNode->value()) + "\n\n";
 			else
-				output += "\t{ no value }\n\n";
+				output += t + "\t{ no value }\n\n";
+			output += t + "\t- - - - - - - -\n";
 
-			output += "\t- - - - - - - -\n";
+			// Print its attributes
+			for (rapidxml::xml_attribute<>* pAttr = siblingNode->first_attribute(); pAttr != NULL; pAttr = pAttr->next_attribute())
+				output += t + "\t" + std::string(pAttr->name()) + " = \"" + std::string(pAttr->value()) + "\"\n";
+			output += t + "\t- - - - - - - -\n";
 
-			for (rapidxml::xml_attribute<>* pAttr = node->first_attribute(); pAttr != NULL; pAttr = pAttr->next_attribute())
-				output += "\t" + std::string(pAttr->name()) + " = \"" + std::string(pAttr->value()) + "\"\n";
-
-			output += "\t- - - - - - - -\n";
+			// Print its children
+			for (rapidxml::xml_node<>* childNode = siblingNode->first_node(); childNode != NULL; childNode = childNode->next_sibling())
+				output += t + "\t" + ToStringRecursive(childNode, ++level) + "\"\n";
 		}
-			
+
 		return output;
 	}
 }

@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "penguine/Scene.h"
 #include "penguine/Graphics.h"
+#include "penguine/Input.h"
 #include "penguine/Time.h"
 
 typedef unsigned int	uint;
@@ -14,13 +15,13 @@ namespace penguine
 		std::vector<Scene*> m_Scenes;
 
 		Graphics* m_Graphics;
+		Input* m_Input;
+		GameTime* m_Time;
 
 		sf::Event* m_Event;
 
-		GameTime* m_Time;
-
 		float Input();
-		void Update(float deltaTimeInSeconds);
+		void Update();
 		void Render();
 
 		void GameLoop();

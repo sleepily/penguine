@@ -8,7 +8,8 @@ namespace penguine
 	Engine::Engine()
 	{
 		m_Event = new sf::Event();
-		m_Time = new GameTime();
+		m_Time = new penguine::GameTime();
+		m_Input = new penguine::Input();
 
 		m_Graphics = new Graphics(sf::Vector2u(800, 600));
 	}
@@ -88,10 +89,11 @@ namespace penguine
 			}
 
 #if PENGUINE_DEBUG
-			float fps = 1.0f / m_Time->GetDeltaTime();
+			float deltaTime = m_Time->GetDeltaTime();
+			float fps = 1.0f / deltaTime;
 
 			std::cout << std::endl << "Time: " << m_Time->GetTimeInSeconds() << " s" << std::endl;
-			std::cout << "Delta Time: " << m_Time->GetDeltaTime() << " s" << std::endl;
+			std::cout << "Delta Time: " << deltaTime << " s" << std::endl;
 			std::cout << "FPS: " << fps << std::endl;
 			std::cout << "Updates: " << system::TARGET_UPDATES << std::endl << std::endl;
 #endif
@@ -99,7 +101,7 @@ namespace penguine
 			updates = 0;
 
 			Input();
-			Update(m_Time->GetDeltaTime());
+			Update();
 			Render();
 		}
 	}
@@ -116,10 +118,10 @@ namespace penguine
 
 		while (m_Graphics->GetWindow()->pollEvent(*m_Event))
 		{
-			// TODO: add Input class
-
 			if (m_Event->type == sf::Event::Closed)
 				m_Graphics->GetWindow()->close();
+
+			m_Input->PollFromEvent(*m_Event);
 		}
 
 #ifdef PENGUINE_DEBUG
@@ -129,7 +131,7 @@ namespace penguine
 		return inputClock.getElapsedTime().asSeconds();
 	}
 
-	void Engine::Update(float deltaTimeInSeconds)
+	void Engine::Update()
 	{
 		m_Time->Update();
 

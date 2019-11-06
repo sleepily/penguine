@@ -18,9 +18,12 @@ namespace penguine
 
 		size_t m_FileSize = 0;
 
+		std::string ToStringRecursive(rapidxml::xml_node<>* firstSibling, unsigned int level);
 		void ReadFile(std::string path);
 		bool Parse();
 	public:
+		rapidxml::xml_node<>* FindChildNode(rapidxml::xml_node<>* pNode, char* szName);
+		rapidxml::xml_attribute<>* FindAttribute(rapidxml::xml_node<>* pNode, char* szName);
 		XML(std::string path);
 		~XML();
 

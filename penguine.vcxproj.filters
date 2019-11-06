@@ -40,6 +40,12 @@
     <Filter Include="Header Files\rapidxml">
       <UniqueIdentifier>{56578b5a-2855-443b-874c-179f6fbfe4fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\penguine\Core\Input">
+      <UniqueIdentifier>{311006bf-b7c1-4078-a5d2-5ebf90543bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\penguine\Core\Input">
+      <UniqueIdentifier>{1c3eec33-c5df-40a5-b6c1-ccf4f450b241}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,9 +78,6 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Source Files\penguine\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Source Files\penguine\Core</Filter>
-    </ClCompile>
     <ClCompile Include="TextBox.cpp">
       <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
@@ -83,6 +86,12 @@
     </ClCompile>
     <ClCompile Include="XML.cpp">
       <Filter>Source Files\penguine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Source Files\penguine\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\penguine\Core\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +125,6 @@
     <ClInclude Include="SystemSettings.h">
       <Filter>Header Files\penguine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files\penguine\Core</Filter>
-    </ClInclude>
     <ClInclude Include="TextBox.h">
       <Filter>Header Files\penguine\Components</Filter>
     </ClInclude>
@@ -142,6 +148,15 @@
     </ClInclude>
     <ClInclude Include="XML.h">
       <Filter>Header Files\penguine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveToMouse.h">
+      <Filter>Header Files\penguine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Header Files\penguine\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\penguine\Core\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

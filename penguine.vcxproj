@@ -144,6 +144,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Moveable.cpp" />
     <ClCompile Include="PenguineObject.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -160,7 +161,9 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Moveable.h" />
+    <ClInclude Include="MoveToMouse.h" />
     <ClInclude Include="PenguineObject.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="rapidxml_iterators.hpp" />

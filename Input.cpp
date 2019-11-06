@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "penguine/Input.h"
+#include "penguine/Mouse.h"
 
 typedef sf::Vector3<bool>	Vector3b;
 
@@ -7,9 +8,7 @@ namespace penguine
 {
 	Input::Input()
 	{
-		MousePosition = sf::Vector2u();
-		MouseScrollDelta = sf::Vector2f();
-		MouseVecolity = sf::Vector2f();
+		m_Mouse = penguine::Mouse();
 	}
 
 	Input::~Input()
@@ -27,52 +26,73 @@ namespace penguine
 
 	}
 
-	void Input::CalculateMouseChanges()
+	void Input::PollFromEvent(sf::Event event)
 	{
-		ReadMouseButtons();
-		ConvertMouseInstructions(m_MouseHold, m_MouseDown);
+		if (event.type == sf::Event::MouseWheelMoved)
+		{
+			if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
+				std::cout << "wheel type: vertical" << std::endl;
+			else if (event.mouseWheelScroll.wheel == sf::Mouse::HorizontalWheel)
+				std::cout << "wheel type: horizontal" << std::endl;
 
+			// m_Mouse. something = event.mouseWheelScroll.delta;
+		}
+
+		ReadMouseButtons();
+		ConvertMouseInstructions();
 	}
-	Vector3b Input::MouseDown()
+
+	bool Input::GetMouseDown()
 	{
-		return m_MouseDown;
+		return m_Mouse.m_ButtonDown;
 	}
-	Vector3b Input::MouseHold()
+
+	bool Input::GetMouseHold()
 	{
-		return m_MouseHold;
+		return m_Mouse.m_ButtonHold;
 	}
-	Vector3b Input::MouseRelease()
+
+	bool Input::GetMouseRelease()
 	{
-		return m_MouseRelease;
+		return m_Mouse.m_ButtonRelease;
 	}
+
+	sf::Vector2u Input::GetMousePosition()
+	{
+		return m_Mouse.m_Position;
+	}
+
+	sf::Vector2f Input::GetMouseVecolity()
+	{
+		return m_Mouse.m_Velocity;
+	}
+
+	sf::Vector2f Input::GetMouseScrollDelta()
+	{
+		return m_Mouse.m_ScrollDelta;
+	}
+
 	void Input::ReadMouseButtons()
 	{
-		m_MouseDown.x = m_Mouse.isButtonPressed(sf::Mouse::Button::Left);
-		m_MouseDown.y = m_Mouse.isButtonPressed(sf::Mouse::Button::Right);
-		m_MouseDown.z = m_Mouse.isButtonPressed(sf::Mouse::Button::Middle);
+		m_Mouse.m_ButtonDown[0] = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
+		m_Mouse.m_ButtonDown[1] = sf::Mouse::isButtonPressed(sf::Mouse::Button::Right);
+		m_Mouse.m_ButtonDown[2] = sf::Mouse::isButtonPressed(sf::Mouse::Button::Middle);
 	}
 
-	void Input::ConvertMouseInstructions(Vector3b hold, Vector3b down)
+	void Input::ConvertMouseInstructions()
 	{
 		Vector3b output();
 
-		// Reduce to hold if mouse is down for the second time
-		down.x = (!hold.x && down.x);
-		down.y = (!hold.y && down.y);
-		down.z = (!hold.z && down.z);
+		for (int i = 0; i < 3; i++)
+		{
+			// Reduce to m_Mouse->m_ButtonHold if mouse is m_Mouse->m_ButtonDown for the second time
+			m_Mouse.m_ButtonDown[i] = (!m_Mouse.m_ButtonHold[i] && m_Mouse.m_ButtonDown[i]);
 
-		// Calculate Holds
-		hold.x = (!hold.x && down.x || hold.x && !down.x);
-		hold.y = (!hold.y && down.y || hold.y && !down.y);
-		hold.z = (!hold.z && down.z || hold.z && !down.z);
+			// Calculate m_Mouse->m_ButtonHolds
+			m_Mouse.m_ButtonHold[i] = (!m_Mouse.m_ButtonHold[i] && m_Mouse.m_ButtonDown[i] || m_Mouse.m_ButtonHold[i] && !m_Mouse.m_ButtonDown[i]);
 
-		// Check for releases
-		m_MouseRelease.x = (m_PreviousMouseHold.x && !hold.x);
-		m_MouseRelease.y = (m_PreviousMouseHold.y && !hold.y);
-		m_MouseRelease.z = (m_PreviousMouseHold.z && !hold.z);
-
-		m_MouseHold = hold;
-
-		m_PreviousMouseHold = m_MouseHold;
+			// Check for releases
+			m_Mouse.m_ButtonRelease[i] = (!m_Mouse.m_ButtonDown[i] && !m_Mouse.m_ButtonHold[i]);
+		}
 	}
 }
