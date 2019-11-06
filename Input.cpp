@@ -76,36 +76,9 @@ namespace penguine
 		ConvertMouseInstructions();
 	}
 
-	bool Input::GetMouseDown()
+	penguine::Mouse* Input::GetMouse()
 	{
-		return m_Mouse->m_ButtonDown;
-	}
-
-	bool Input::GetMouseHold()
-	{
-		return m_Mouse->m_ButtonHold;
-	}
-
-	bool Input::GetMouseRelease()
-	{
-		return m_Mouse->m_ButtonRelease;
-	}
-
-	sf::Vector2i* Input::GetMousePosition()
-	{
-		std::cout << "Mouse Position: " << m_Mouse->m_Position->x << "x, " << m_Mouse->m_Position->y << "y. " << std::endl;
-
-		return m_Mouse->m_Position;
-	}
-
-	sf::Vector2f* Input::GetMouseVecolity()
-	{
-		return m_Mouse->m_Velocity;
-	}
-
-	sf::Vector2f* Input::GetMouseScrollDelta()
-	{
-		return m_Mouse->m_ScrollDelta;
+		return m_Mouse;
 	}
 
 	void Input::ReadMouseButtons()

@@ -25,6 +25,7 @@ int main()
 
 	scene->AddGameObject(go);
 
+	/*
 	penguine::TextBox* textBox = new penguine::TextBox();
 	textBox->SetString("This is a test Text Box.");
 
@@ -32,17 +33,21 @@ int main()
 	moveable->movementType = penguine::Moveable::MovementType::ORBIT;
 	moveable->amplitude = 1.0f;
 	moveable->speed = 6.28f;
+	*/
 
 	penguine::SpriteRenderer* spriteRenderer = new penguine::SpriteRenderer();
 
 	penguine::MoveToMouse* moveToMouse = new penguine::MoveToMouse();
 
-	go->AddComponent(textBox);
+	// go->AddComponent(textBox);
 	// go->AddComponent(moveable);
 	go->AddComponent(spriteRenderer);
 	go->AddComponent(moveToMouse);
 
+	/*
+	// Set position to screen half
 	go->GetTransform()->position = new sf::Vector3f(engine->GetGraphics()->GetWindow()->getSize().x / 3.0f, engine->GetGraphics()->GetWindow()->getSize().y / 2.0f, 0);
+	*/
 
 	engine->AddScene(scene);
 

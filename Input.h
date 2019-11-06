@@ -27,12 +27,6 @@ namespace penguine
 		void PollFromEvent(sf::Event event);
 		void ReadMouseButtons();
 
-		bool GetMouseDown();
-		bool GetMouseHold();
-		bool GetMouseRelease();
-
-		sf::Vector2i* GetMousePosition();
-		sf::Vector2f* GetMouseVecolity();
-		sf::Vector2f* GetMouseScrollDelta();
+		penguine::Mouse* GetMouse();
 	};
 }
