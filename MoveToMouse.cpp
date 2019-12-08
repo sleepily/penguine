@@ -2,33 +2,60 @@
 #include "Engine.h"
 #include "Mouse.h"
 
-penguine::MoveToMouse::MoveToMouse()
+namespace penguine
 {
-	m_Name = "MoveToMouse";
-	m_IsEnabled = true;
-	m_ScrollOffset = new sf::Vector2f();
-}
+	MoveToMouse::MoveToMouse()
+	{
+		m_Name = "MoveToMouse";
+		m_IsEnabled = true;
+		m_OnClick = true;
 
-void penguine::MoveToMouse::Update()
-{
-	if (!m_IsEnabled)
-		return;
+		sf::Vector2i* mousePos = engine->GetInput()->GetMouse()->GetPosition();
 
-	penguine::Mouse* mouse = engine->GetInput()->GetMouse();
+		m_LerpPosition = new sf::Vector3f(mousePos->x, mousePos->y, 0);
+	}
 
-	m_ScrollOffset->x += (int)mouse->GetScrollDelta()->x;
-	m_ScrollOffset->y += (int)mouse->GetScrollDelta()->y;
+	void MoveToMouse::Update()
+	{
+		if (!m_IsEnabled)
+			return;
 
-	m_GameObject->GetTransform()->position =
-		new sf::Vector3f
-		(
-			mouse->GetPosition()->x + m_ScrollOffset->x * 10.0f,
-			mouse->GetPosition()->y + m_ScrollOffset->y * 10.0f,
-			m_GameObject->GetTransform()->position->z
-		);
-}
+		if (m_LastClick > FLT_EPSILON && m_IsLerping)
+		{
+			// lerp current position towards lerpPosition by lerpDuration
+			float timeSinceLastClick = m_LastClick - engine->GetTime()->GetTimeInSeconds();
 
-void penguine::MoveToMouse::Render()
-{
+			if (timeSinceLastClick > 0)
+				m_GameObject->GetTransform()->position =
+				MathX::LerpPosition
+				(
+					m_GameObject->GetTransform()->position,
+					m_LerpPosition,
+					MathX::Map01(m_LastClick - engine->GetTime()->GetTimeInSeconds(), 0, m_LerpDuration)
+				);
+			else
+			{
+				m_GameObject->GetTransform()->position = m_LerpPosition;
+				m_IsLerping = false;
+			}
+		}
 
+		if (m_OnClick && engine->GetInput()->GetMouse()->GetMouseDown())
+			OnClick();
+	}
+
+	void MoveToMouse::Render()
+	{
+
+	}
+
+	void MoveToMouse::OnClick()
+	{
+		sf::Vector2i* position = engine->GetInput()->GetMouse()->GetPosition();
+
+		m_LastClick = engine->GetTime()->GetTimeInSeconds();
+
+		m_IsLerping = true;
+		m_LerpPosition = new sf::Vector3f(position->x, position->y, 0);
+	}
 }

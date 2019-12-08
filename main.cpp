@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Engine.h"
 #include "SpriteRenderer.h"
+#include "BoxCollider.h"
 #include "MoveToMouse.h"
 #include "TextBox.h"
 #include "Moveable.h"
@@ -41,11 +42,15 @@ int main()
 
 	penguine::SpriteRenderer* spriteRenderer = new penguine::SpriteRenderer();
 
+	penguine::BoxCollider* boxCollider = new penguine::BoxCollider(spriteRenderer);
+	boxCollider->SetVisibility(true);
+
 	penguine::MoveToMouse* moveToMouse = new penguine::MoveToMouse();
 
 	// go->AddComponent(textBox);
 	// go->AddComponent(moveable);
 	go->AddComponent(spriteRenderer);
+	go->AddComponent(boxCollider);
 	go->AddComponent(moveToMouse);
 	
 	engine->AddScene(scene);
