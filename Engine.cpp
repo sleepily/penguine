@@ -72,7 +72,7 @@ namespace penguine
 		return m_Time;
 	}
 
-	penguine::Input* Engine::GetInput()
+	Input* Engine::GetInput()
 	{
 		return m_Input;
 	}

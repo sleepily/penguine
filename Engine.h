@@ -9,6 +9,8 @@ typedef unsigned int	uint;
 
 namespace penguine
 {
+	class Input;
+
 	class Engine
 	{
 	private:

@@ -10,7 +10,8 @@ namespace penguine
 		m_IsEnabled = true;
 		m_OnClick = true;
 
-		sf::Vector2i* mousePos = engine->GetInput()->GetMouse()->GetPosition();
+		// sf::Vector2i* mousePos = engine->GetInput()->GetMouse()->GetPosition();
+		sf::Vector2i* mousePos = new sf::Vector2i(0, 0);
 
 		m_LerpPosition = new sf::Vector3f(mousePos->x, mousePos->y, 0);
 	}
