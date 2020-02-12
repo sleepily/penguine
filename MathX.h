@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "penguine/Engine.h"
+#include "Engine.h"
 
 namespace penguine
 {

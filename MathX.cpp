@@ -1,4 +1,4 @@
-#include "penguine/MathX.h"
+#include "MathX.h"
 
 namespace penguine
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "penguine/Component.h"
-#include "penguine/SpriteRenderer.h"
-#include "penguine/Engine.h"
+#include "Component.h"
+#include "SpriteRenderer.h"
+#include "Engine.h"
 
 namespace penguine
 {

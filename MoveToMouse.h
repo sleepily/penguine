@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "penguine/Component.h"
-#include "penguine/MathX.h"
+#include "Component.h"
+#include "MathX.h"
 
 namespace penguine
 {
