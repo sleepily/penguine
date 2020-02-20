@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
+#include <list>
 #include "SystemSettings.h"
 #include "Engine.h"
+#include "XMLTranslator.h"
 
 namespace penguine
 {
@@ -93,6 +95,16 @@ namespace penguine
 	{
 		return m_Scenes;
 	}
+
+	void Engine::ReadObjects(XML* xml)
+	{
+		XMLTranslator* translator = new XMLTranslator();
+
+		std::vector<Scene*>* scenesToAdd = translator->TranslateXML(xml, this);
+
+		for (Scene* sceneToAdd : *scenesToAdd)
+			AddScene(sceneToAdd);
+	}
 	
 	void Engine::GameLoop()
 	{
@@ -169,6 +181,8 @@ namespace penguine
 
 	void Engine::Update()
 	{
+		m_Input->Update();
+
 		m_Time->Update();
 
 		for (Scene* scene : m_Scenes)

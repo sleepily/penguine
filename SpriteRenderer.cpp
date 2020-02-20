@@ -8,9 +8,9 @@ namespace penguine
 {
 	SpriteRenderer::SpriteRenderer()
 	{
-		sf::Texture* texture = new sf::Texture();
-		texture->loadFromFile("assets1/snake1.png");
-		m_Sprite = new sf::Sprite(*texture);
+		m_Texture = new sf::Texture();
+		m_Texture->loadFromFile("assets1/snake1.png");
+		m_Sprite = new sf::Sprite(*m_Texture);
 		m_Name = "SpriteRenderer";
 		m_IsEnabled = true;
 	}
@@ -56,6 +56,17 @@ namespace penguine
 	void SpriteRenderer::SetSprite(sf::Sprite* sprite)
 	{
 		m_Sprite = sprite;
+	}
+
+	void SpriteRenderer::SetSprite(std::string path)
+	{
+		if (!m_Texture->loadFromFile(path))
+		{
+			std::cout << "Could not load sprite: " << path << std::endl;
+			return;
+		}
+
+		m_Sprite = new sf::Sprite(*m_Texture);
 	}
 
 	sf::Sprite* SpriteRenderer::GetSprite()

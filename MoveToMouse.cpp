@@ -50,6 +50,11 @@ namespace penguine
 
 	}
 
+	sf::Vector3f* MoveToMouse::GetMouseDirection()
+	{
+		return m_LerpPosition;
+	}
+
 	void MoveToMouse::OnClick()
 	{
 		sf::Vector2i* position = engine->GetInput()->GetMouse()->GetPosition();
@@ -58,5 +63,7 @@ namespace penguine
 
 		m_IsLerping = true;
 		m_LerpPosition = new sf::Vector3f(position->x, position->y, 0);
+
+		std::cout << "\t\tCLICK" << std::endl;
 	}
 }

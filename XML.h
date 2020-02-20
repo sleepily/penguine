@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include <list>
 #include "rapidxml.hpp"
 
 namespace penguine
@@ -22,12 +23,13 @@ namespace penguine
 		void ReadFile(std::string path);
 		bool Parse();
 	public:
-		rapidxml::xml_node<>* FindChildNode(rapidxml::xml_node<>* pNode, char* szName);
-		rapidxml::xml_attribute<>* FindAttribute(rapidxml::xml_node<>* pNode, char* szName);
+		static rapidxml::xml_node<>* FindChildNode(rapidxml::xml_node<>* pNode, const char* szName);
+		static rapidxml::xml_attribute<>* FindAttribute(rapidxml::xml_node<>* pNode, const char* szName);
 		XML(std::string path);
-		~XML();
 
 		size_t GetFileSize();
+
+		rapidxml::xml_node<>* GetRootNode();
 
 		std::string ToString();
 	};

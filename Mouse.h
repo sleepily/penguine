@@ -8,7 +8,7 @@ namespace penguine
 	{
 	private:
 		bool m_IsInWindow;
-		bool m_ButtonDown[3], m_ButtonHold[3], m_PreviousButtonHold[3], m_ButtonRelease[3];
+		bool m_ButtonPressed[3], m_ButtonHold[3], m_PreviousButtonHold[3], m_ButtonRelease[3];
 
 		sf::Vector2i* m_Position;
 

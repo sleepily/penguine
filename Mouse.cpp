@@ -9,7 +9,7 @@ namespace penguine
 		m_ScrollDelta = new sf::Vector2f();
 		m_Velocity = new sf::Vector2f();
 
-		memset(m_ButtonDown, 0, sizeof(m_ButtonDown));
+		memset(m_ButtonPressed, 0, sizeof(m_ButtonPressed));
 		memset(m_ButtonHold, 0, sizeof(m_ButtonHold));
 		memset(m_ButtonRelease, 0, sizeof(m_ButtonRelease));
 	}
@@ -31,7 +31,7 @@ namespace penguine
 
 	bool Mouse::GetMouseDown()
 	{
-		return m_ButtonDown;
+		return m_ButtonPressed;
 	}
 
 	bool Mouse::GetMouseHold()

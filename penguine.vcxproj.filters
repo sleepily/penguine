@@ -46,6 +46,12 @@
     <Filter Include="Source Files\penguine\Core\Input">
       <UniqueIdentifier>{1c3eec33-c5df-40a5-b6c1-ccf4f450b241}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\penguine\Core\XML">
+      <UniqueIdentifier>{0581d4e8-b0f5-4af2-879a-e4ccdff190a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\penguine\Core\XML">
+      <UniqueIdentifier>{d1e16fa7-b073-4cb7-ab85-a9d0ef259e08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -84,9 +90,6 @@
     <ClCompile Include="Moveable.cpp">
       <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
-    <ClCompile Include="XML.cpp">
-      <Filter>Source Files\penguine\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Source Files\penguine\Core\Input</Filter>
     </ClCompile>
@@ -101,6 +104,18 @@
     </ClCompile>
     <ClCompile Include="MathX.cpp">
       <Filter>Source Files\penguine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="XML.cpp">
+      <Filter>Source Files\penguine\Core\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLTranslator.cpp">
+      <Filter>Source Files\penguine\Core\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Source Files\penguine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\penguine\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +170,6 @@
     <ClInclude Include="AudioSource.h">
       <Filter>Header Files\penguine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="XML.h">
-      <Filter>Header Files\penguine\Core</Filter>
-    </ClInclude>
     <ClInclude Include="MoveToMouse.h">
       <Filter>Header Files\penguine\Components</Filter>
     </ClInclude>
@@ -172,6 +184,15 @@
     </ClInclude>
     <ClInclude Include="MathX.h">
       <Filter>Header Files\penguine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="XML.h">
+      <Filter>Header Files\penguine\Core\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLTranslator.h">
+      <Filter>Header Files\penguine\Core\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\penguine\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -20,6 +20,8 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
+		sf::Vector3f* GetMouseDirection();
+
 		void OnClick();
 	};
 }

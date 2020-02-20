@@ -11,9 +11,10 @@ namespace penguine
 
 	class Input: public PenguineObject
 	{
+	private:
 		sf::Time m_LastPollTime, m_CurrentPollTime;
 
-		penguine::Mouse* m_Mouse;
+		Mouse* m_Mouse;
 
 		void ConvertMouseInstructions();
 
@@ -24,9 +25,12 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
-		void PollFromEvent(sf::Event event);
-		void ReadMouseButtons();
+		void ResetMouseButtons();
 
-		penguine::Mouse* GetMouse();
+		void PollFromEvent(sf::Event event);
+		void ReadMouseButtons(sf::Event event);
+		void GetReleasedButtons(sf::Event event);
+
+		Mouse* GetMouse();
 	};
 }

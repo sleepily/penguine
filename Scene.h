@@ -23,6 +23,7 @@ namespace penguine
 
 	public:
 		Scene();
+		Scene(size_t id, std::string name);
 		virtual ~Scene();
 
 		virtual void Update();

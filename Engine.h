@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "Input.h"
 #include "Time.h"
+#include "XML.h"
 
 typedef unsigned int	uint;
 
@@ -34,6 +35,7 @@ namespace penguine
 		~Engine();
 
 		void Start();
+		void ReadObjects(XML* xml);
 
 		Graphics* GetGraphics();
 		penguine::GameTime* GetTime();

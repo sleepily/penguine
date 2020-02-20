@@ -12,6 +12,15 @@ namespace penguine
 		m_GameObjects = new std::vector<GameObject*>();
 	}
 
+	Scene::Scene(size_t id, std::string name)
+	{
+		m_Name = name;
+		m_IsActive = true;
+		m_GameObjectCount = 0;
+		m_SceneID = id;
+		m_GameObjects = new std::vector<GameObject*>();
+	}
+
 	Scene::~Scene()
 	{
 

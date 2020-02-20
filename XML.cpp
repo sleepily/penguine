@@ -2,26 +2,26 @@
 #include <string>
 #include <stdio.h>
 #include <cctype>
+#include <list>
 #include <algorithm>
 #include "XML.h"
 #include "rapidxml.hpp"
 
 namespace penguine
 {
-	rapidxml::xml_node<>* XML::FindChildNode(rapidxml::xml_node<>* pNode, char* szName)
+	rapidxml::xml_node<>* XML::FindChildNode(rapidxml::xml_node<>* parentNode, const char* nameToFind)
 	{
-		for (rapidxml::xml_node<>* pChild = pNode->first_node(); pChild != NULL; pChild = pChild->next_sibling()) {
-			if (strcmp(pChild->name(), szName) == 0) return pChild;
-		}
+		for (rapidxml::xml_node<>* childNode = parentNode->first_node(); childNode != NULL; childNode = childNode->next_sibling())
+			if (strcmp(childNode->name(), nameToFind) == 0) return childNode;
+
 		return NULL;
 	}
 
-	rapidxml::xml_attribute<>* XML::FindAttribute(rapidxml::xml_node<>* pNode, char* szName)
+	rapidxml::xml_attribute<>* XML::FindAttribute(rapidxml::xml_node<>* node, const char* attributeName)
 	{
-		for (rapidxml::xml_attribute<>* pAttr = pNode->first_attribute(); pAttr != NULL; pAttr = pAttr->next_attribute())
-		{
-			if (strcmp(pAttr->name(), szName) == 0) return pAttr;
-		}
+		for (rapidxml::xml_attribute<>* attribute = node->first_attribute(); attribute != NULL; attribute = attribute->next_attribute())
+			if (strcmp(attribute->name(), attributeName) == 0) return attribute;
+
 		return NULL;
 	}
 
@@ -61,9 +61,7 @@ namespace penguine
 		m_XMLDocument->parse<0>(m_XMLContents);
 
 		m_RootNode = m_XMLDocument->first_node();
-		m_Node = m_RootNode->first_node();
-
-		std::string temp = m_Node->name();
+		m_Node = m_RootNode;
 
 		return true;
 	}
@@ -75,51 +73,53 @@ namespace penguine
 
 		return 0;
 	}
+
+	rapidxml::xml_node<>* XML::GetRootNode()
+	{
+		return m_RootNode;
+	}
 	
 	std::string XML::ToString()
 	{
 		std::string output;
-
-		output += "XML File " + m_FileName + ": \n\n";
 
 		output += ToStringRecursive(m_Node, 0);
 			
 		return output;
 	}
 
-	std::string XML::ToStringRecursive(rapidxml::xml_node<>* firstSibling, unsigned int level)
+	std::string XML::ToStringRecursive(rapidxml::xml_node<>* node, unsigned int level)
 	{
 		std::string output;
 
-		std::string t = "";
+		std::string tab = "";
 
 		for (unsigned int i = 0; i < level; i++)
-			t += "\t";
+			tab += "  ";
 
-		for (rapidxml::xml_node<>* siblingNode = firstSibling; siblingNode != NULL; siblingNode = siblingNode->next_sibling())
+		std::string nodeName = std::string(node->name());
+		std::string nodeValue = std::string(node->value());
+		std::string nodeAttributes = "";
+
+		const rapidxml::node_type nodeType = node->type();
+
+		switch (nodeType)
 		{
-			output += t + "\n<" + std::string(siblingNode->name()) + "> \n";
+		case rapidxml::node_element:
+			output += tab + "Name: " + nodeName + "\n";
 
-			// Trim Name to filter out empty values
-			std::string nodeValueTrimmed = siblingNode->value();
-			nodeValueTrimmed.erase(std::remove_if(nodeValueTrimmed.begin(), nodeValueTrimmed.end(), std::isspace), nodeValueTrimmed.end());
-			nodeValueTrimmed.erase(std::remove_if(nodeValueTrimmed.begin(), nodeValueTrimmed.end(), std::isblank), nodeValueTrimmed.end());
+			for (rapidxml::xml_attribute<>* attribute = node->first_attribute(); attribute; attribute = attribute->next_attribute())
+				nodeAttributes += std::string(attribute->name()) + " = \"" + std::string(attribute->value()) + "\", ";
 
-			// Print node value
-			if (!nodeValueTrimmed.empty())
-				output += t + "\t" + std::string(siblingNode->value()) + "\n\n";
-			else
-				output += t + "\t{ no value }\n\n";
-			output += t + "\t- - - - - - - -\n";
+			for (rapidxml::xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling())
+				output += ToStringRecursive(childNode, level + 1) + "\n";
 
-			// Print its attributes
-			for (rapidxml::xml_attribute<>* pAttr = siblingNode->first_attribute(); pAttr != NULL; pAttr = pAttr->next_attribute())
-				output += t + "\t" + std::string(pAttr->name()) + " = \"" + std::string(pAttr->value()) + "\"\n";
-			output += t + "\t- - - - - - - -\n";
-
-			// Print its children
-			for (rapidxml::xml_node<>* childNode = siblingNode->first_node(); childNode != NULL; childNode = childNode->next_sibling())
-				output += t + "\t" + ToStringRecursive(childNode, ++level) + "\"\n";
+			break;
+		case rapidxml::node_data:
+			output += tab + nodeValue + "\n";
+			break;
+		default:
+			break;
 		}
 
 		return output;

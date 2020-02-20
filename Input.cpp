@@ -1,7 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Input.h"
-#include "Mouse.h"
 
 namespace penguine
 {
@@ -17,7 +16,7 @@ namespace penguine
 
 	void Input::Update()
 	{
-
+		ResetMouseButtons();
 	}
 
 	void Input::Render()
@@ -68,38 +67,101 @@ namespace penguine
 
 			break;
 
+		case sf::Event::MouseButtonPressed:
+			ReadMouseButtons(event);
+			break;
+
+		case sf::Event::MouseButtonReleased:
+			GetReleasedButtons(event);
+			ReadMouseButtons(event);
+			break;
+
 		default:
 			break;
 		}
-
-		ReadMouseButtons();
-		ConvertMouseInstructions();
 	}
 
-	penguine::Mouse* Input::GetMouse()
+	Mouse* Input::GetMouse()
 	{
 		return m_Mouse;
 	}
 
-	void Input::ReadMouseButtons()
+	void Input::GetReleasedButtons(sf::Event event)
 	{
-		m_Mouse->m_ButtonDown[0] = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
-		m_Mouse->m_ButtonDown[1] = sf::Mouse::isButtonPressed(sf::Mouse::Button::Right);
-		m_Mouse->m_ButtonDown[2] = sf::Mouse::isButtonPressed(sf::Mouse::Button::Middle);
+		for (int button = 0; button < 3; button++)
+			if (event.mouseButton.button == (sf::Mouse::Button)button)
+				m_Mouse->m_ButtonRelease[button] = true;
+	}
+
+	void Input::ReadMouseButtons(sf::Event event)
+	{
+		for (int button = 0; button < 3; button++)
+		{
+			// Get mouse press through AND
+			if (!m_Mouse->m_ButtonPressed[button] && !m_Mouse->m_PreviousButtonHold[button])
+				m_Mouse->m_ButtonPressed[button] = sf::Mouse::isButtonPressed((sf::Mouse::Button)button);
+
+			if (m_Mouse->m_ButtonPressed[button] && m_Mouse->m_PreviousButtonHold[button])
+				m_Mouse->m_ButtonPressed[button] = false;
+
+			if (m_Mouse->m_ButtonPressed[button] && !m_Mouse->m_PreviousButtonHold[button])
+				m_Mouse->m_ButtonHold[button] = true;
+
+			if (m_Mouse->m_ButtonRelease[button])
+				m_Mouse->m_ButtonHold[button] = false;
+		}
+
+		std::cout << std::endl << "Down    ";
+
+		for (int b = 0; b < 3; b++)
+			std::cout << m_Mouse->m_ButtonPressed[b] << " ";
+
+		std::cout << std::endl << "Hold    ";
+
+		for (int b = 0; b < 3; b++)
+			std::cout << m_Mouse->m_ButtonHold[b] << " ";
+
+		std::cout << std::endl << "Release ";
+
+		for (int b = 0; b < 3; b++)
+			std::cout << m_Mouse->m_ButtonRelease[b] << " ";
+
+		std::cout << std::endl;
 	}
 
 	void Input::ConvertMouseInstructions()
 	{
+
 		for (int i = 0; i < 3; i++)
 		{
 			// Reduce to m_Mouse->m_ButtonHold if mouse is m_Mouse->m_ButtonDown for the second time
-			m_Mouse->m_ButtonDown[i] = (!m_Mouse->m_ButtonHold[i] && m_Mouse->m_ButtonDown[i]);
+			if (m_Mouse->m_PreviousButtonHold[i])
+				m_Mouse->m_ButtonPressed[i] = false;
 
 			// Calculate m_Mouse->m_ButtonHolds
-			m_Mouse->m_ButtonHold[i] = (!m_Mouse->m_ButtonHold[i] && m_Mouse->m_ButtonDown[i] || m_Mouse->m_ButtonHold[i] && !m_Mouse->m_ButtonDown[i]);
+			m_Mouse->m_ButtonHold[i] =
+				(
+					!m_Mouse->m_PreviousButtonHold[i] && m_Mouse->m_ButtonPressed[i] ||
+					m_Mouse->m_PreviousButtonHold[i] && !m_Mouse->m_ButtonRelease[i]
+				);
 
 			// Check for releases
-			m_Mouse->m_ButtonRelease[i] = (!m_Mouse->m_ButtonDown[i] && !m_Mouse->m_ButtonHold[i]);
+			m_Mouse->m_ButtonRelease[i] = (m_Mouse->m_PreviousButtonHold[i] && !m_Mouse->m_ButtonPressed[i]);
+		}
+	}
+
+	void Input::ResetMouseButtons()
+	{
+		for (int i = 0; i < 3; i++)
+			m_Mouse->m_PreviousButtonHold[i] = m_Mouse->m_ButtonHold[i];
+
+		for (int i = 0; i < 3; i++)
+		{
+			if (m_Mouse->m_ButtonRelease[i])
+				m_Mouse->m_ButtonHold[i] = false;
+
+			m_Mouse->m_ButtonPressed[i] = false;
+			m_Mouse->m_ButtonRelease[i] = false;
 		}
 	}
 }

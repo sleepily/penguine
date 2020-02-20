@@ -8,6 +8,7 @@
 #include "TextBox.h"
 #include "Moveable.h"
 #include "Transform.h"
+#include "Character.h"
 #include "XML.h"
 
 /*
@@ -23,14 +24,19 @@ int main()
 
 	penguine::XML* xml = new penguine::XML("assets/data.xml");
 
+	// std::cout << xml->ToString();
+
+	engine->ReadObjects(xml);
+
 	// TODO: Replace this with XML reading
+
+	/*
 	penguine::Scene* scene = new penguine::Scene();
 
 	penguine::GameObject* go = new penguine::GameObject();
 
 	scene->AddGameObject(go);
 
-	/*
 	penguine::TextBox* textBox = new penguine::TextBox();
 	textBox->SetString("This is a test Text Box.");
 
@@ -38,7 +44,6 @@ int main()
 	moveable->movementType = penguine::Moveable::MovementType::ORBIT;
 	moveable->amplitude = 1.0f;
 	moveable->speed = 6.28f;
-	*/
 
 	penguine::SpriteRenderer* spriteRenderer = new penguine::SpriteRenderer();
 
@@ -46,14 +51,16 @@ int main()
 	boxCollider->SetVisibility(true);
 
 	penguine::MoveToMouse* moveToMouse = new penguine::MoveToMouse();
+	
 
 	// go->AddComponent(textBox);
 	// go->AddComponent(moveable);
-	go->AddComponent(spriteRenderer);
-	go->AddComponent(boxCollider);
-	go->AddComponent(moveToMouse);
+	// go->AddComponent(spriteRenderer);
+	// go->AddComponent(boxCollider);
+	// go->AddComponent(moveToMouse);
 	
 	engine->AddScene(scene);
+	*/
 
 	engine->Start();
 
