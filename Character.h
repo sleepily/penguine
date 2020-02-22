@@ -11,6 +11,8 @@ namespace penguine
 		std::string m_CharacterName;
 		std::string m_Dialogue;
 
+		sf::Vector3f* m_TargetPosition;
+
 		TextBox* m_TextBox;
 		MoveToMouse* m_MoveToMouse;
 		SpriteRenderer* m_SpriteRenderer;
@@ -21,9 +23,9 @@ namespace penguine
 		virtual void Start();
 		virtual void Update();
 
-		void Move();
-
-		void SetInfo(std::string name, std::string dialogue);
+		void SetDialogue(std::string dialogue);
 		void SetSprite(std::string path);
+
+		friend class XMLTranslator;
 	};
 }

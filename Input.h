@@ -14,6 +14,8 @@ namespace penguine
 	private:
 		sf::Time m_LastPollTime, m_CurrentPollTime;
 
+		bool m_ButtonDown[3], m_ButtonHold[3], m_PreviousButtonHold[3], m_ButtonUp[3];
+
 		Mouse* m_Mouse;
 
 		void ConvertMouseInstructions();
@@ -30,6 +32,7 @@ namespace penguine
 		void PollFromEvent(sf::Event event);
 		void ReadMouseButtons(sf::Event event);
 		void GetReleasedButtons(sf::Event event);
+		void WriteMouseButtons();
 
 		Mouse* GetMouse();
 	};

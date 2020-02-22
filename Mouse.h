@@ -18,11 +18,12 @@ namespace penguine
 	public:
 		Mouse();
 
-		bool GetMouseDown();
-		bool GetMouseHold();
-		bool GetMouseRelease();
+		bool GetMouseDown(int button);
+		bool GetMouseHold(int button);
+		bool GetMouseRelease(int button);
 
 		sf::Vector2i* GetPosition();
+		sf::Vector3f* GetPosition3D();
 		sf::Vector2f* GetVecolity();
 		sf::Vector2f* GetScrollDelta();
 

@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include "MoveToMouse.h"
 #include "Engine.h"
 #include "Mouse.h"
@@ -10,10 +11,8 @@ namespace penguine
 		m_IsEnabled = true;
 		m_OnClick = true;
 
-		// sf::Vector2i* mousePos = engine->GetInput()->GetMouse()->GetPosition();
-		sf::Vector2i* mousePos = new sf::Vector2i(0, 0);
-
-		m_LerpPosition = new sf::Vector3f(mousePos->x, mousePos->y, 0);
+		m_LerpStartPosition = new sf::Vector3f;
+		m_LerpEndPosition = new sf::Vector3f;
 	}
 
 	void MoveToMouse::Update()
@@ -21,27 +20,9 @@ namespace penguine
 		if (!m_IsEnabled)
 			return;
 
-		if (m_LastClick > FLT_EPSILON && m_IsLerping)
-		{
-			// lerp current position towards lerpPosition by lerpDuration
-			float timeSinceLastClick = m_LastClick - engine->GetTime()->GetTimeInSeconds();
+		Move();
 
-			if (timeSinceLastClick > 0)
-				m_GameObject->GetTransform()->position =
-				MathX::LerpPosition
-				(
-					m_GameObject->GetTransform()->position,
-					m_LerpPosition,
-					MathX::Map01(m_LastClick - engine->GetTime()->GetTimeInSeconds(), 0, m_LerpDuration)
-				);
-			else
-			{
-				m_GameObject->GetTransform()->position = m_LerpPosition;
-				m_IsLerping = false;
-			}
-		}
-
-		if (m_OnClick && engine->GetInput()->GetMouse()->GetMouseDown())
+		if (m_OnClick && engine->GetInput()->GetMouse()->GetMouseDown(0))
 			OnClick();
 	}
 
@@ -50,20 +31,41 @@ namespace penguine
 
 	}
 
+	void MoveToMouse::Move()
+	{
+		if (m_LastClick > FLT_EPSILON && m_IsLerping)
+		{
+			if (engine->GetTime()->GetTimeInSeconds() >= m_LastClick + m_LerpDuration)
+			{
+				m_IsLerping = false;
+				m_LastClick = 0;
+
+				m_GameObject->GetTransform()->position = m_LerpEndPosition;
+				return;
+			}
+
+			m_GameObject->GetTransform()->position =
+				MathX::LerpPosition
+				(
+					m_LerpStartPosition,
+					m_LerpEndPosition,
+					MathX::Map01(engine->GetTime()->GetTimeInSeconds(), m_LastClick, m_LastClick + m_LerpDuration)
+				);
+		}
+	}
+
 	sf::Vector3f* MoveToMouse::GetMouseDirection()
 	{
-		return m_LerpPosition;
+		return m_LerpEndPosition;
 	}
 
 	void MoveToMouse::OnClick()
 	{
-		sf::Vector2i* position = engine->GetInput()->GetMouse()->GetPosition();
-
 		m_LastClick = engine->GetTime()->GetTimeInSeconds();
 
 		m_IsLerping = true;
-		m_LerpPosition = new sf::Vector3f(position->x, position->y, 0);
 
-		std::cout << "\t\tCLICK" << std::endl;
+		m_LerpStartPosition = m_GameObject->GetTransform()->position;
+		m_LerpEndPosition = engine->GetInput()->GetMouse()->GetPosition3D();
 	}
 }

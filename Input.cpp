@@ -16,6 +16,7 @@ namespace penguine
 
 	void Input::Update()
 	{
+		WriteMouseButtons();
 		ResetMouseButtons();
 	}
 
@@ -90,7 +91,17 @@ namespace penguine
 	{
 		for (int button = 0; button < 3; button++)
 			if (event.mouseButton.button == (sf::Mouse::Button)button)
-				m_Mouse->m_ButtonUp[button] = true;
+				m_ButtonUp[button] = true;
+	}
+
+	void Input::WriteMouseButtons()
+	{
+		for (int button = 0; button < 3; button++)
+		{
+			m_Mouse->m_ButtonDown[button] = m_ButtonDown[button];
+			m_Mouse->m_ButtonHold[button] = m_ButtonHold[button];
+			m_Mouse->m_ButtonUp[button] = m_ButtonUp[button];
+		}
 	}
 
 	void Input::ReadMouseButtons(sf::Event event)
@@ -98,19 +109,21 @@ namespace penguine
 		for (int button = 0; button < 3; button++)
 		{
 			// Get mouse press through AND
-			if (!m_Mouse->m_ButtonDown[button] && !m_Mouse->m_PreviousButtonHold[button])
-				m_Mouse->m_ButtonDown[button] = sf::Mouse::isButtonPressed((sf::Mouse::Button)button);
+			if (!m_ButtonDown[button] && !m_PreviousButtonHold[button])
+				m_ButtonDown[button] = sf::Mouse::isButtonPressed((sf::Mouse::Button)button);
 
-			if (m_Mouse->m_ButtonDown[button] && m_Mouse->m_PreviousButtonHold[button])
-				m_Mouse->m_ButtonDown[button] = false;
+			if (m_ButtonDown[button] && m_PreviousButtonHold[button])
+				m_ButtonDown[button] = false;
 
-			if (m_Mouse->m_ButtonDown[button] && !m_Mouse->m_PreviousButtonHold[button])
-				m_Mouse->m_ButtonHold[button] = true;
+			if (m_ButtonDown[button] && !m_PreviousButtonHold[button])
+				m_ButtonHold[button] = true;
 
-			if (m_Mouse->m_ButtonUp[button])
-				m_Mouse->m_ButtonHold[button] = false;
+			if (m_ButtonUp[button])
+				m_ButtonHold[button] = false;
 		}
 
+#ifdef PENGUINE_DEBUG
+		std::cout << std::endl << "Mouse Button Updates:";
 		std::cout << std::endl << "Down    ";
 
 		for (int b = 0; b < 3; b++)
@@ -127,6 +140,7 @@ namespace penguine
 			std::cout << m_Mouse->m_ButtonUp[b] << " ";
 
 		std::cout << std::endl;
+#endif
 	}
 
 	void Input::ConvertMouseInstructions()
@@ -135,33 +149,33 @@ namespace penguine
 		for (int i = 0; i < 3; i++)
 		{
 			// Reduce to m_Mouse->m_ButtonHold if mouse is m_Mouse->m_ButtonDown for the second time
-			if (m_Mouse->m_PreviousButtonHold[i])
-				m_Mouse->m_ButtonDown[i] = false;
+			if (m_PreviousButtonHold[i])
+				m_ButtonDown[i] = false;
 
 			// Calculate m_Mouse->m_ButtonHolds
-			m_Mouse->m_ButtonHold[i] =
+			m_ButtonHold[i] =
 				(
-					!m_Mouse->m_PreviousButtonHold[i] && m_Mouse->m_ButtonDown[i] ||
-					m_Mouse->m_PreviousButtonHold[i] && !m_Mouse->m_ButtonUp[i]
+					!m_PreviousButtonHold[i] && m_ButtonDown[i] ||
+					m_PreviousButtonHold[i] && !m_ButtonUp[i]
 				);
 
 			// Check for releases
-			m_Mouse->m_ButtonUp[i] = (m_Mouse->m_PreviousButtonHold[i] && !m_Mouse->m_ButtonDown[i]);
+			m_ButtonUp[i] = (m_PreviousButtonHold[i] && !m_ButtonDown[i]);
 		}
 	}
 
 	void Input::ResetMouseButtons()
 	{
 		for (int i = 0; i < 3; i++)
-			m_Mouse->m_PreviousButtonHold[i] = m_Mouse->m_ButtonHold[i];
+			m_PreviousButtonHold[i] = m_ButtonHold[i];
 
 		for (int i = 0; i < 3; i++)
 		{
-			if (m_Mouse->m_ButtonUp[i])
-				m_Mouse->m_ButtonHold[i] = false;
+			if (m_ButtonUp[i])
+				m_ButtonHold[i] = false;
 
-			m_Mouse->m_ButtonDown[i] = false;
-			m_Mouse->m_ButtonUp[i] = false;
+			m_ButtonDown[i] = false;
+			m_ButtonUp[i] = false;
 		}
 	}
 }

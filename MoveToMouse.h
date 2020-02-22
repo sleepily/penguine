@@ -9,7 +9,7 @@ namespace penguine
 	{
 	private:
 		bool m_OnClick = true;
-		sf::Vector3f* m_LerpPosition;
+		sf::Vector3f *m_LerpStartPosition, *m_LerpEndPosition;
 		float m_LerpDuration = 1.0f;
 		float m_LastClick = 0;
 		bool m_IsLerping = false;
@@ -21,6 +21,8 @@ namespace penguine
 		virtual void Render();
 
 		sf::Vector3f* GetMouseDirection();
+
+		void Move();
 
 		void OnClick();
 	};

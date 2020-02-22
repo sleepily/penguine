@@ -19,6 +19,16 @@ namespace penguine
 		return m_Position;
 	}
 
+	sf::Vector3f* Mouse::GetPosition3D()
+	{
+		return new sf::Vector3f
+		(
+			m_Position->x,
+			m_Position->y,
+			0
+		);
+	}
+
 	sf::Vector2f* Mouse::GetVecolity()
 	{
 		return m_Velocity;
@@ -29,18 +39,18 @@ namespace penguine
 		return m_ScrollDelta;
 	}
 
-	bool Mouse::GetMouseDown()
+	bool Mouse::GetMouseDown(int button)
 	{
-		return m_ButtonDown;
+		return m_ButtonDown[button];
 	}
 
-	bool Mouse::GetMouseHold()
+	bool Mouse::GetMouseHold(int button)
 	{
-		return m_ButtonHold;
+		return m_ButtonHold[button];
 	}
 
-	bool Mouse::GetMouseRelease()
+	bool Mouse::GetMouseRelease(int button)
 	{
-		return m_ButtonUp;
+		return m_ButtonUp[button];
 	}
 }

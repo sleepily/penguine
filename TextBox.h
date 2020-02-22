@@ -9,6 +9,9 @@ namespace penguine
 	class TextBox: public Component
 	{
 	protected:
+		sf::Vector2i* m_Offset;
+		sf::Color m_FillColor;
+
 		sf::Vector2u* m_Dimensions;
 		sf::Font* m_Font;
 		sf::Text* m_Text;

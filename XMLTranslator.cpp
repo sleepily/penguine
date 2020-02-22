@@ -52,9 +52,20 @@ namespace penguine
 		{
 			Character* character = new Character();
 
-			character->SetInfo(XML::FindAttribute(node, "name")->value(), XML::FindChildNode(node, "dialogue")->value());
+			if (XML::FindAttribute(node, "name"))
+				character->m_CharacterName = XML::FindAttribute(node, "name")->value();
+			else
+				std::cout << "Attribute \"name\" not found in character. Keeping Default." << std::endl;
 
-			character->SetSprite(XML::FindAttribute(node, "sprite")->value());
+			if (XML::FindChildNode(node, "dialogue"))
+				character->SetDialogue(XML::FindChildNode(node, "dialogue")->value());
+			else
+				std::cout << "Child node <dialogue> not found in character." << std::endl;
+
+			if (XML::FindAttribute(node, "sprite"))
+				character->SetSprite(XML::FindAttribute(node, "sprite")->value());
+			else
+				std::cout << "Attribute \"sprite\" not found in character. Keeping Default." << std::endl;
 
 			return character;
 		}

@@ -9,6 +9,9 @@ namespace penguine
 		m_TextBox = new penguine::TextBox();
 		m_MoveToMouse = new penguine::MoveToMouse();
 		m_SpriteRenderer = new penguine::SpriteRenderer();
+		m_SpriteRenderer->SetSprite("assets/char.png");
+
+		m_TargetPosition = new sf::Vector3f();
 
 		AddComponent(m_TextBox);
 		AddComponent(m_MoveToMouse);
@@ -22,18 +25,13 @@ namespace penguine
 
 	void Character::Update()
 	{
+		for (Component* component : *m_Components)
+			component->Update();
 	}
 
-	void Character::Move()
+	void Character::SetDialogue(std::string dialogue)
 	{
-
-	}
-
-	void Character::SetInfo(std::string name, std::string dialogue)
-	{
-		m_CharacterName = name;
 		m_Dialogue = dialogue;
-
 		m_TextBox->SetString(m_Dialogue);
 	}
 

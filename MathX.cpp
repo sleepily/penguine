@@ -14,7 +14,7 @@ namespace penguine
 
 	float MathX::Lerp(float t, float a, float b)
 	{
-		return a + (t * b);
+		return a + (t * (b - a));
 	}
 
 	float MathX::Map(float value, float min, float max, float outMin, float outMax)

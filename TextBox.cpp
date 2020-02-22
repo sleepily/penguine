@@ -8,13 +8,16 @@ namespace penguine
 	{
 		m_Dimensions = new sf::Vector2u(100, 100);
 		m_Font = new sf::Font();
-		m_Font->loadFromFile("assets1/fonts/DEADCRT.ttf");
+		m_Font->loadFromFile("assets/Believer.otf");
 		m_String = "";
 		m_IsEnabled = true;
 
 		m_Name = "TextBox";
 
 		m_Text = new sf::Text();
+
+		m_Text->setCharacterSize(18);
+		m_Text->setFillColor(sf::Color(0, 255, 0));
 	}
 
 	TextBox::~TextBox()
@@ -29,10 +32,8 @@ namespace penguine
 		m_Text->setFont(*m_Font);
 
 		m_Text->setPosition(*m_GameObject->GetTransform()->position2D());
-		m_Text->setCharacterSize(18);
-		m_Text->setFillColor(sf::Color(0, 255, 0));
-		m_Text->setOutlineThickness(1.0f);
-		m_Text->setOutlineColor(sf::Color::Red);
+		// m_Text->setOutlineThickness(1.0f);
+		// m_Text->setOutlineColor(sf::Color::Red);
 
 		m_Text->setString(m_String);
 
