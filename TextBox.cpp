@@ -20,7 +20,7 @@ namespace penguine
 		m_Text = new sf::Text();
 
 		m_Text->setCharacterSize(30);
-		m_Text->setFillColor(sf::Color(0, 255, 0));
+		m_Text->setFillColor(sf::Color::White);
 	}
 
 	TextBox::~TextBox()

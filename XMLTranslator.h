@@ -16,5 +16,6 @@ namespace penguine
 		std::vector<Scene*>* TranslateXML(XML* xml, Engine* engine);
 		Scene* ConvertToScene(rapidxml::xml_node<>* node, Engine* engine);
 		GameObject* ConvertToGameObject(rapidxml::xml_node<>* node);
+		Component* ConvertToComponent(rapidxml::xml_node<>* node);
 	};
 }

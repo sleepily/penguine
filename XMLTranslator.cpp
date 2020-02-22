@@ -6,6 +6,8 @@
 #include "PenguineObject.h"
 #include "Component.h"
 #include "Character.h"
+#include "Dialogue.h"
+#include "Sound.h"
 
 namespace penguine
 {
@@ -22,8 +24,6 @@ namespace penguine
 	Scene* XMLTranslator::ConvertToScene(rapidxml::xml_node<>* node, Engine* engine)
 	{
 		std::string nodeName = std::string(node->name());
-
-		// const rapidxml::node_type nodeType = node->type();
 		
 		if (nodeName != "scene")
 			return NULL;
@@ -37,12 +37,20 @@ namespace penguine
 
 		scene->SetEngine(engine);
 
+		int count = 0;
+
 		for (rapidxml::xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling())
 		{
-			GameObject* objectInScene = ConvertToGameObject(childNode);
+			count++;
 
-			if (objectInScene)
-				scene->AddGameObject(objectInScene);
+			std::cout << count << ": " << childNode->name() << ", " << childNode->value() << std::endl;
+
+			GameObject* objectInScene = ConvertToGameObject(childNode);
+			if (!objectInScene)
+				continue;
+
+			//TODO: look for and add components
+			scene->AddGameObject(objectInScene);
 		}
 
 		return scene;
@@ -51,9 +59,14 @@ namespace penguine
 	GameObject* XMLTranslator::ConvertToGameObject(rapidxml::xml_node<>* node)
 	{
 		std::string nodeName = std::string(node->name());
-		std::string nodeValue = std::string(node->value());
 
 		std::string objectType = "";
+
+		if (nodeName == "component")
+		{
+			std::cout << "Please use the <component> node inside of an <object> node." << std::endl;
+			return NULL;
+		}
 
 		if (XML::FindAttribute(node, "type"))
 			objectType = XML::FindAttribute(node, "type")->value();
@@ -85,11 +98,6 @@ namespace penguine
 			return character;
 		}
 
-		if (objectType == "sound")
-		{
-			//TODO
-		}
-
 		if (objectType == "image")
 		{
 			GameObject* image = new GameObject();
@@ -98,10 +106,42 @@ namespace penguine
 
 			if (XML::FindAttribute(node, "sprite"))
 				spriteRenderer->SetSprite(XML::FindAttribute(node, "sprite")->value());
-
+			
 			image->AddComponent(spriteRenderer);
 
+			if (XML::FindAttribute(node, "x"))
+				image->GetTransform()->position->x = std::stoi(XML::FindAttribute(node, "x")->value());
+			if (XML::FindAttribute(node, "y"))
+				image->GetTransform()->position->y = std::stoi(XML::FindAttribute(node, "y")->value());
+
 			return image;
+		}
+
+		return NULL;
+	}
+
+	Component* XMLTranslator::ConvertToComponent(rapidxml::xml_node<>* node)
+	{
+		std::string nodeName = std::string(node->name());
+
+		if (nodeName == "object")
+		{
+			std::cout << "For now, only one level of <object> nodes is possible." << std::endl;
+			return NULL;
+		}
+
+		std::string objectType = "";
+
+		if (XML::FindAttribute(node, "type"))
+			objectType = XML::FindAttribute(node, "type")->value();
+
+		if (objectType == "dialogue")
+		{
+			Dialogue* dialogue = new Dialogue();
+			
+			// add node value
+
+			return dialogue;
 		}
 
 		return NULL;

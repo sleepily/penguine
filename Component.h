@@ -12,6 +12,8 @@ namespace penguine
 	protected:
 		bool m_IsEnabled = true;
 
+		std::string m_ActionType = "none";
+
 		GameObject* m_GameObject;
 
 	public:
