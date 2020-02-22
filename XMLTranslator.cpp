@@ -38,7 +38,12 @@ namespace penguine
 		scene->SetEngine(engine);
 
 		for (rapidxml::xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling())
-			scene->AddGameObject(ConvertToGameObject(childNode));
+		{
+			GameObject* objectInScene = ConvertToGameObject(childNode);
+
+			if (objectInScene)
+				scene->AddGameObject(objectInScene);
+		}
 
 		return scene;
 	}
@@ -48,7 +53,12 @@ namespace penguine
 		std::string nodeName = std::string(node->name());
 		std::string nodeValue = std::string(node->value());
 
-		if (nodeName == "character")
+		std::string objectType = "";
+
+		if (XML::FindAttribute(node, "type"))
+			objectType = XML::FindAttribute(node, "type")->value();
+
+		if (objectType == "character")
 		{
 			Character* character = new Character();
 
@@ -67,7 +77,33 @@ namespace penguine
 			else
 				std::cout << "Attribute \"sprite\" not found in character. Keeping Default." << std::endl;
 
+			if (XML::FindAttribute(node, "x"))
+				character->GetTransform()->position->x = std::stoi(XML::FindAttribute(node, "x")->value());
+			if (XML::FindAttribute(node, "y"))
+				character->GetTransform()->position->y = std::stoi(XML::FindAttribute(node, "y")->value());
+
 			return character;
 		}
+
+		if (objectType == "sound")
+		{
+			//TODO
+		}
+
+		if (objectType == "image")
+		{
+			GameObject* image = new GameObject();
+
+			SpriteRenderer* spriteRenderer = new SpriteRenderer();
+
+			if (XML::FindAttribute(node, "sprite"))
+				spriteRenderer->SetSprite(XML::FindAttribute(node, "sprite")->value());
+
+			image->AddComponent(spriteRenderer);
+
+			return image;
+		}
+
+		return NULL;
 	}
 }

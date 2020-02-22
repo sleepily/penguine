@@ -67,5 +67,8 @@ namespace penguine
 
 		m_LerpStartPosition = m_GameObject->GetTransform()->position;
 		m_LerpEndPosition = engine->GetInput()->GetMouse()->GetPosition3D();
+
+		if (m_OnlyUseX)
+			m_LerpEndPosition->y = m_GameObject->GetTransform()->position->y;
 	}
 }

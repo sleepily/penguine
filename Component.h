@@ -24,5 +24,6 @@ namespace penguine
 		virtual std::string ToString();
 
 		friend class GameObject;
+		friend class XMLTranslator;
 	};
 }

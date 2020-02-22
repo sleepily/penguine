@@ -5,6 +5,8 @@
 
 namespace penguine
 {
+	class MoveToMouse;
+
 	class Character : public GameObject
 	{
 	private:

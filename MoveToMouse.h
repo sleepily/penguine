@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Component.h"
 #include "MathX.h"
+#include "Character.h"
 
 namespace penguine
 {
@@ -14,6 +15,8 @@ namespace penguine
 		float m_LastClick = 0;
 		bool m_IsLerping = false;
 
+		bool m_OnlyUseX = false;
+
 	public:
 		MoveToMouse();
 		
@@ -25,5 +28,7 @@ namespace penguine
 		void Move();
 
 		void OnClick();
+
+		friend class Character;
 	};
 }

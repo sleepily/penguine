@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/System/Vector3.hpp>
 #include "TextBox.h"
 #include "Engine.h"
 
@@ -12,11 +13,13 @@ namespace penguine
 		m_String = "";
 		m_IsEnabled = true;
 
+		m_Offset = new sf::Vector2f(0.0f, -40.0f);
+
 		m_Name = "TextBox";
 
 		m_Text = new sf::Text();
 
-		m_Text->setCharacterSize(18);
+		m_Text->setCharacterSize(30);
 		m_Text->setFillColor(sf::Color(0, 255, 0));
 	}
 
@@ -31,15 +34,9 @@ namespace penguine
 
 		m_Text->setFont(*m_Font);
 
-		m_Text->setPosition(*m_GameObject->GetTransform()->position2D());
-		// m_Text->setOutlineThickness(1.0f);
-		// m_Text->setOutlineColor(sf::Color::Red);
+		m_Text->setPosition(*m_GameObject->GetTransform()->position2D() + *m_Offset);
 
 		m_Text->setString(m_String);
-
-#ifdef PENGUINE_DEBUG
-		std::cout << "Updated " << m_Name << "..." << std::endl;
-#endif // PENGUINE_DEBUG
 	}
 
 	void TextBox::Render()
@@ -54,7 +51,9 @@ namespace penguine
 	{
 		m_String = string;
 
-		// m_Text->setOrigin(m_GameObject->GetTransform()->position->x, m_GameObject->GetTransform()->position->y);
+		sf::FloatRect textRect = m_Text->getLocalBounds();
+		m_Text->setOrigin(textRect.left + textRect.width / 2.0f,
+			textRect.top + textRect.height / 2.0f);
 	}
 	
 	std::string TextBox::GetString()

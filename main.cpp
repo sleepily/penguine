@@ -14,7 +14,6 @@
 /*
 TODO: move all header files to class factory
 TODO: fix XML reading/writing, XML ToString()
-TODO: finish mouse input: buttons; relative position?
 TODO: add keyboard input
 */
 
@@ -24,11 +23,7 @@ int main()
 
 	penguine::XML* xml = new penguine::XML("assets/data.xml");
 
-	// std::cout << xml->ToString();
-
 	engine->ReadObjects(xml);
-
-	// TODO: Replace this with XML reading
 
 	/*
 	penguine::Scene* scene = new penguine::Scene();

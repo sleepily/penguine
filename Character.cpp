@@ -6,12 +6,16 @@ namespace penguine
 	Character::Character()
 	{
 		m_Name = "Character";
-		m_TextBox = new penguine::TextBox();
-		m_MoveToMouse = new penguine::MoveToMouse();
-		m_SpriteRenderer = new penguine::SpriteRenderer();
-		m_SpriteRenderer->SetSprite("assets/char.png");
 
 		m_TargetPosition = new sf::Vector3f();
+
+		m_TextBox = new penguine::TextBox();
+
+		m_MoveToMouse = new penguine::MoveToMouse();
+		m_MoveToMouse->m_OnlyUseX = true;
+
+		m_SpriteRenderer = new penguine::SpriteRenderer();
+		m_SpriteRenderer->SetSprite("assets/char.png");
 
 		AddComponent(m_TextBox);
 		AddComponent(m_MoveToMouse);

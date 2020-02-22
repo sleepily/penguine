@@ -153,6 +153,7 @@
     <ClCompile Include="MoveToMouse.cpp" />
     <ClCompile Include="PenguineObject.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -161,7 +162,6 @@
     <ClCompile Include="XMLTranslator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioSource.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Component.h" />
@@ -179,6 +179,7 @@
     <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SystemSettings.h" />
     <ClInclude Include="TextBox.h" />
