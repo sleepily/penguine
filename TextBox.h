@@ -28,7 +28,7 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
-		virtual void CheckAction(std::string actionType);
+		virtual void DoAction(std::string actionType);
 
 		void SetString(std::string string);
 		std::string GetString();
@@ -41,5 +41,8 @@ namespace penguine
 		void SetDisplayTime(float time);
 
 		virtual std::string ToString();
+		void SetFont(std::string path);
+
+		friend class XMLTranslator;
 	};
 }

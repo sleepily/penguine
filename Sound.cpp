@@ -20,6 +20,23 @@ namespace penguine
 
 	void Sound::Play()
 	{
+		m_Sound->setLoop(m_IsLoop);
 		m_Sound->play();
+	}
+
+	void Sound::DoAction(std::string actionType)
+	{
+		if (actionType == "click" && m_ActionType == "click")
+			Play();
+	}
+
+	void Sound::Update()
+	{
+		if (m_IsAutoplay)
+			if (m_Sound->getBuffer())
+			{
+				m_IsAutoplay = false;
+				Play();
+			}
 	}
 }

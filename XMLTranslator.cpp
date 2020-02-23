@@ -128,7 +128,7 @@ namespace penguine
 			return image;
 		}
 
-		return NULL;
+		return new GameObject();
 	}
 
 	Component* XMLTranslator::ConvertToComponent(rapidxml::xml_node<>* node)
@@ -155,6 +155,12 @@ namespace penguine
 			if (XML::FindAttribute(node, "time"))
 				text->SetDisplayTime(std::stof(XML::FindAttribute(node, "time")->value()));
 
+			if (XML::FindAttribute(node, "size"))
+				text->m_Text->setCharacterSize(std::stoi(XML::FindAttribute(node, "size")->value()));
+
+			if (XML::FindAttribute(node, "font"))
+				text->SetFont(XML::FindAttribute(node, "font")->value());
+
 			return text;
 		}
 
@@ -164,6 +170,25 @@ namespace penguine
 
 			if (XML::FindAttribute(node, "file"))
 				sound->LoadFromFile(XML::FindAttribute(node, "file")->value());
+
+			if (XML::FindAttribute(node, "volume"))
+				sound->m_Sound->setVolume(std::stoi(XML::FindAttribute(node, "volume")->value()));
+
+			if (XML::FindAttribute(node, "loop"))
+			{
+				std::string loopValue = XML::FindAttribute(node, "loop")->value();
+
+				if (loopValue == "yes" || loopValue == "true")
+					sound->m_IsLoop = true;
+			}
+
+			if (XML::FindAttribute(node, "autoplay"))
+			{
+				std::string autoplayValue = XML::FindAttribute(node, "autoplay")->value();
+
+				if (autoplayValue == "yes" || autoplayValue == "true")
+					sound->m_IsAutoplay = true;
+			}
 
 			if (XML::FindAttribute(node, "action"))
 			{

@@ -9,7 +9,7 @@ namespace penguine
 	{
 		m_Dimensions = new sf::Vector2u(100, 100);
 		m_Font = new sf::Font();
-		m_Font->loadFromFile("assets/Believer.otf");
+		m_Font->loadFromFile("assets/Arial.ttf");
 		m_String = "";
 		m_IsEnabled = true;
 
@@ -57,7 +57,7 @@ namespace penguine
 		engine->GetGraphics()->GetWindow()->draw(*m_Text);
 	}
 
-	void TextBox::CheckAction(std::string actionType)
+	void TextBox::DoAction(std::string actionType)
 	{
 		if (actionType == "hover" && m_ActionType == "hover" ||
 			actionType == "click" && m_ActionType == "click")
@@ -108,5 +108,11 @@ namespace penguine
 	std::string TextBox::ToString()
 	{
 		return m_Name;
+	}
+
+	void TextBox::SetFont(std::string path)
+	{
+		if (!m_Font->loadFromFile(path))
+			std::cout << "Couldn't load font " << path << std::endl;
 	}
 }

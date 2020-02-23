@@ -10,7 +10,6 @@ namespace penguine
 	SpriteRenderer::SpriteRenderer()
 	{
 		m_Texture = new sf::Texture();
-		m_Texture->loadFromFile("assets1/snake1.png");
 		m_Sprite = new sf::Sprite(*m_Texture);
 		m_Name = "SpriteRenderer";
 		m_IsEnabled = true;

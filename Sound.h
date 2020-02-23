@@ -10,12 +10,19 @@ namespace penguine
 		sf::SoundBuffer* m_Buffer;
 		sf::Sound* m_Sound;
 
-		bool m_isLoop = false;
+		bool m_IsLoop = false;
+		bool m_IsAutoplay = false;
 
 	public:
 		Sound();
 
+		virtual void DoAction(std::string actionType);
+
+		virtual void Update();
+
 		void LoadFromFile(std::string path);
 		void Play();
+
+		friend class XMLTranslator;
 	};
 }
