@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "PenguineObject.h"
 #include "GameObject.h"
 
@@ -22,6 +23,10 @@ namespace penguine
 
 		virtual void Update();
 		virtual void Render();
+
+		virtual void DoAction(std::string actionType);
+
+		void SetActionType(std::string type);
 
 		virtual std::string ToString();
 

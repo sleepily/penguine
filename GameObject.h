@@ -38,6 +38,10 @@ namespace penguine
 
 		Component* AddComponent(Component* component);
 
+		Component* GetComponent(std::string name);
+
+		void CallActionComponents(std::string actionType);
+
 		virtual std::string ToString();
 
 		friend class Component;

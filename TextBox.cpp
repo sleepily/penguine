@@ -13,7 +13,7 @@ namespace penguine
 		m_String = "";
 		m_IsEnabled = true;
 
-		m_Offset = new sf::Vector2f(0.0f, -40.0f);
+		m_Offset = new sf::Vector2f(-100.0f, -160.0f);
 
 		m_Name = "TextBox";
 
@@ -25,6 +25,7 @@ namespace penguine
 
 	TextBox::~TextBox()
 	{
+
 	}
 
 	void TextBox::Update()
@@ -37,6 +38,12 @@ namespace penguine
 		m_Text->setPosition(*m_GameObject->GetTransform()->position2D() + *m_Offset);
 
 		m_Text->setString(m_String);
+
+		if (m_StartTime > FLT_EPSILON)
+			if (m_ActionType == "hover" || m_ActionType == "click")
+			{
+				CheckTimer();
+			}
 	}
 
 	void TextBox::Render()
@@ -44,9 +51,22 @@ namespace penguine
 		if (!m_IsEnabled)
 			return;
 
+		if (!m_IsVisible)
+			return;
+
 		engine->GetGraphics()->GetWindow()->draw(*m_Text);
 	}
-	
+
+	void TextBox::CheckAction(std::string actionType)
+	{
+		if (actionType == "hover" && m_ActionType == "hover" ||
+			actionType == "click" && m_ActionType == "click")
+		{
+			m_StartTime = engine->GetTime()->GetTimeInSeconds();
+			SetVisibility(true);
+		}
+	}
+
 	void TextBox::SetString(std::string string)
 	{
 		m_String = string;
@@ -59,6 +79,30 @@ namespace penguine
 	std::string TextBox::GetString()
 	{
 		return m_String;
+	}
+
+	void TextBox::SetVisibility(bool isVisible)
+	{
+		m_IsVisible = isVisible;
+	}
+
+	bool TextBox::GetVisibility()
+	{
+		return m_IsVisible;
+	}
+
+	void TextBox::CheckTimer()
+	{
+		if (engine->GetTime()->GetTimeInSeconds() >= m_StartTime + m_DisplayTime)
+		{
+			SetVisibility(false);
+			m_StartTime = 0;
+		}
+	}
+
+	void TextBox::SetDisplayTime(float time)
+	{
+		m_DisplayTime = time;
 	}
 
 	std::string TextBox::ToString()

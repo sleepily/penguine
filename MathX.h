@@ -15,5 +15,8 @@ namespace penguine
 
 		static float Clamp(float value, float min, float max);
 		static float Clamp01(float value);
+
+		static sf::Vector2f V2iToV2f(sf::Vector2i vector);
+		static sf::Vector2i V2fToV2i(sf::Vector2f vector);
 	};
 }

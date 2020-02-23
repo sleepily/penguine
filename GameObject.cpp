@@ -93,6 +93,18 @@ namespace penguine
 		return component;
 	}
 
+	Component* GameObject::GetComponent(std::string name)
+	{
+
+		return NULL;
+	}
+
+	void GameObject::CallActionComponents(std::string actionType)
+	{
+		for (Component* actionComponent : *m_Components)
+			actionComponent->DoAction(actionType);
+	}
+
 	std::string GameObject::ToString()
 	{
 		std::string outputString;

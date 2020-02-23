@@ -12,9 +12,7 @@ namespace penguine
 	{
 		if (!m_Buffer->loadFromFile(path))
 		{
-			std::cout << "Couldn't load Sound at " << path << ", Loading Default." << std::endl;
-			path = "assets/tom.wav";
-			m_Buffer->loadFromFile(path);
+			std::cout << "Couldn't load Sound at " << path << "." << std::endl;
 		}
 
 		m_Sound->setBuffer(*m_Buffer);

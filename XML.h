@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <fstream>
-#include <list>
+#include <vector>
 #include "rapidxml.hpp"
 
 namespace penguine
@@ -23,7 +23,8 @@ namespace penguine
 		void ReadFile(std::string path);
 		bool Parse();
 	public:
-		static rapidxml::xml_node<>* FindChildNode(rapidxml::xml_node<>* pNode, const char* szName);
+		static rapidxml::xml_node<>* FindChildNode(rapidxml::xml_node<>* parentNode, const char* nameToFind);
+		std::vector<rapidxml::xml_node<>*>* FindChildNodes(rapidxml::xml_node<>* parentNode, const char* nameToFind);
 		static rapidxml::xml_attribute<>* FindAttribute(rapidxml::xml_node<>* pNode, const char* szName);
 		XML(std::string path);
 

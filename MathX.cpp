@@ -42,4 +42,14 @@ namespace penguine
 	{
 		return Clamp(value, 0, 1);
 	}
+
+	sf::Vector2f MathX::V2iToV2f(sf::Vector2i vector)
+	{
+		return sf::Vector2f(vector.x, vector.y);
+	}
+
+	sf::Vector2i MathX::V2fToV2i(sf::Vector2f vector)
+	{
+		return sf::Vector2i(vector.x, vector.y);
+	}
 }

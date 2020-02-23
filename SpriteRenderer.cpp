@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "SpriteRenderer.h"
 #include "Engine.h"
+#include "MathX.h"
 
 namespace penguine
 {
@@ -29,7 +30,10 @@ namespace penguine
 		sf::Vector2f spritePosition(goPosition->x, goPosition->y);
 		// TODO: Set Sprite origin to half width and half height
 		// sf::Vector2f half = sf::Vector2f(m_Sprite->getLocalBounds().width / 2.0f, m_Sprite->getLocalBounds().height / 2.0f);
+		m_Sprite->setOrigin(m_Sprite->getLocalBounds().width / 2.0f, m_Sprite->getLocalBounds().height / 2.0f);
 		m_Sprite->setPosition(spritePosition);
+
+		CheckForMouse();
 
 #ifdef PENGUINE_DEBUG
 		std::cout << "Updated " << ToString() << "..." << std::endl;
@@ -46,6 +50,26 @@ namespace penguine
 #ifdef PENGUINE_DEBUG
 		std::cout << "Rendered " << ToString() << "..." << std::endl;
 #endif // PENGUINE_DEBUG
+	}
+
+	void SpriteRenderer::CheckForMouse()
+	{
+		bool mouseInBounds = m_Sprite->getGlobalBounds().contains(MathX::V2iToV2f(*engine->GetInput()->GetMouse()->GetPosition()));
+		bool mouseClick = engine->GetInput()->GetMouse()->GetMouseDown(0);
+
+		if (mouseInBounds && mouseClick)
+		{
+			m_GameObject->CallActionComponents("click");
+			return;
+		}
+
+		if (mouseInBounds)
+			m_GameObject->CallActionComponents("hover");
+	}
+
+	void SpriteRenderer::CheckAction()
+	{
+
 	}
 
 	std::string SpriteRenderer::ToString()

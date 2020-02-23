@@ -12,15 +12,28 @@ namespace penguine
 	rapidxml::xml_node<>* XML::FindChildNode(rapidxml::xml_node<>* parentNode, const char* nameToFind)
 	{
 		for (rapidxml::xml_node<>* childNode = parentNode->first_node(); childNode != NULL; childNode = childNode->next_sibling())
-			if (strcmp(childNode->name(), nameToFind) == 0) return childNode;
+			if (strcmp(childNode->name(), nameToFind) == 0)
+				return childNode;
 
 		return NULL;
+	}
+
+	std::vector<rapidxml::xml_node<>*>* XML::FindChildNodes(rapidxml::xml_node<>* parentNode, const char* nameToFind)
+	{
+		std::vector<rapidxml::xml_node<>*>* output = new std::vector<rapidxml::xml_node<>*>();
+
+		for (rapidxml::xml_node<>* childNode = parentNode->first_node(); childNode != NULL; childNode = childNode->next_sibling())
+			if (strcmp(childNode->name(), nameToFind) == 0)
+				output->push_back(childNode);
+
+		return output;
 	}
 
 	rapidxml::xml_attribute<>* XML::FindAttribute(rapidxml::xml_node<>* node, const char* attributeName)
 	{
 		for (rapidxml::xml_attribute<>* attribute = node->first_attribute(); attribute != NULL; attribute = attribute->next_attribute())
-			if (strcmp(attribute->name(), attributeName) == 0) return attribute;
+			if (strcmp(attribute->name(), attributeName) == 0)
+				return attribute;
 
 		return NULL;
 	}

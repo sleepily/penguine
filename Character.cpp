@@ -15,7 +15,6 @@ namespace penguine
 		m_MoveToMouse->m_OnlyUseX = true;
 
 		m_SpriteRenderer = new penguine::SpriteRenderer();
-		m_SpriteRenderer->SetSprite("assets/char.png");
 
 		AddComponent(m_TextBox);
 		AddComponent(m_MoveToMouse);

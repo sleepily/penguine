@@ -1,21 +1,7 @@
 #include <stdio.h>
 #include <iostream>
-#include "GameObject.h"
 #include "Engine.h"
-#include "SpriteRenderer.h"
-#include "BoxCollider.h"
-#include "MoveToMouse.h"
-#include "TextBox.h"
-#include "Moveable.h"
-#include "Transform.h"
-#include "Character.h"
 #include "XML.h"
-
-/*
-TODO: move all header files to class factory
-TODO: fix XML reading/writing, XML ToString()
-TODO: add keyboard input
-*/
 
 int main()
 {
@@ -26,6 +12,8 @@ int main()
 	engine->ReadObjects(xml);
 
 	/*
+	// Some leftover test code :D
+
 	penguine::Scene* scene = new penguine::Scene();
 
 	penguine::GameObject* go = new penguine::GameObject();

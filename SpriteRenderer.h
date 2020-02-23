@@ -19,6 +19,10 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
+		void CheckForMouse();
+
+		virtual void CheckAction();
+
 		virtual std::string ToString();
 
 		void SetSprite(sf::Sprite* sprite);

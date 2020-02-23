@@ -24,32 +24,42 @@ namespace penguine
 	Scene* XMLTranslator::ConvertToScene(rapidxml::xml_node<>* node, Engine* engine)
 	{
 		std::string nodeName = std::string(node->name());
+		std::string sceneName = "", sceneID = "";
 		
 		if (nodeName != "scene")
 			return NULL;
 
-		std::string sceneName(XML::FindAttribute(node, "name")->value());
+		if (XML::FindAttribute(node, "name"))
+			sceneName = XML::FindAttribute(node, "name")->value();
 
-		std::string sID(XML::FindAttribute(node, "id")->value());
-		int sceneID = std::stoi(sID);
+		if (XML::FindAttribute(node, "id"))
+			sceneID = XML::FindAttribute(node, "id")->value();
 
-		Scene* scene = new Scene(sceneID, sceneName);
+		int ID = (!sceneID.empty()) ? std::stoi(sceneID) : 0;
+
+		Scene* scene = new Scene(ID, sceneName);
 
 		scene->SetEngine(engine);
 
-		int count = 0;
-
-		for (rapidxml::xml_node<>* childNode = node->first_node(); childNode; childNode = childNode->next_sibling())
+		for (rapidxml::xml_node<>* objectNode = node->first_node(); objectNode; objectNode = objectNode->next_sibling())
 		{
-			count++;
-
-			std::cout << count << ": " << childNode->name() << ", " << childNode->value() << std::endl;
-
-			GameObject* objectInScene = ConvertToGameObject(childNode);
+			// Get GameObjects
+			GameObject* objectInScene = ConvertToGameObject(objectNode);
+			
 			if (!objectInScene)
 				continue;
 
-			//TODO: look for and add components
+			// Add Components
+			for (rapidxml::xml_node<>* componentNode = objectNode->first_node(); componentNode; componentNode = componentNode->next_sibling())
+			{
+				Component* objectComponent = ConvertToComponent(componentNode);
+				
+				if (!objectComponent)
+					continue;
+
+				objectInScene->AddComponent(objectComponent);
+			}
+
 			scene->AddGameObject(objectInScene);
 		}
 
@@ -79,16 +89,14 @@ namespace penguine
 				character->m_CharacterName = XML::FindAttribute(node, "name")->value();
 			else
 				std::cout << "Attribute \"name\" not found in character. Keeping Default." << std::endl;
-
-			if (XML::FindChildNode(node, "dialogue"))
-				character->SetDialogue(XML::FindChildNode(node, "dialogue")->value());
-			else
-				std::cout << "Child node <dialogue> not found in character." << std::endl;
-
+		    
 			if (XML::FindAttribute(node, "sprite"))
 				character->SetSprite(XML::FindAttribute(node, "sprite")->value());
 			else
 				std::cout << "Attribute \"sprite\" not found in character. Keeping Default." << std::endl;
+
+			if (XML::FindAttribute(node, "action"))
+				character->m_SpriteRenderer->SetActionType(XML::FindAttribute(node, "action")->value());
 
 			if (XML::FindAttribute(node, "x"))
 				character->GetTransform()->position->x = std::stoi(XML::FindAttribute(node, "x")->value());
@@ -106,6 +114,9 @@ namespace penguine
 
 			if (XML::FindAttribute(node, "sprite"))
 				spriteRenderer->SetSprite(XML::FindAttribute(node, "sprite")->value());
+
+			if (XML::FindAttribute(node, "action"))
+				spriteRenderer->SetActionType(XML::FindAttribute(node, "action")->value());
 			
 			image->AddComponent(spriteRenderer);
 
@@ -113,7 +124,7 @@ namespace penguine
 				image->GetTransform()->position->x = std::stoi(XML::FindAttribute(node, "x")->value());
 			if (XML::FindAttribute(node, "y"))
 				image->GetTransform()->position->y = std::stoi(XML::FindAttribute(node, "y")->value());
-
+			
 			return image;
 		}
 
@@ -124,24 +135,43 @@ namespace penguine
 	{
 		std::string nodeName = std::string(node->name());
 
-		if (nodeName == "object")
-		{
-			std::cout << "For now, only one level of <object> nodes is possible." << std::endl;
-			return NULL;
-		}
-
 		std::string objectType = "";
 
 		if (XML::FindAttribute(node, "type"))
 			objectType = XML::FindAttribute(node, "type")->value();
 
-		if (objectType == "dialogue")
+		if (objectType == "text")
 		{
-			Dialogue* dialogue = new Dialogue();
+			TextBox* text = new TextBox();
 			
-			// add node value
+			text->SetString(node->value());
 
-			return dialogue;
+			if (XML::FindAttribute(node, "action"))
+			{
+				text->SetActionType(XML::FindAttribute(node, "action")->value());
+				text->SetVisibility(false); // Hide text if it has to be activated through an action
+			}
+
+			if (XML::FindAttribute(node, "time"))
+				text->SetDisplayTime(std::stof(XML::FindAttribute(node, "time")->value()));
+
+			return text;
+		}
+
+		if (objectType == "sound")
+		{
+			Sound* sound = new Sound();
+
+			if (XML::FindAttribute(node, "file"))
+				sound->LoadFromFile(XML::FindAttribute(node, "file")->value());
+
+			if (XML::FindAttribute(node, "action"))
+			{
+				sound->m_ActionType = XML::FindAttribute(node, "action")->value();
+				// turn autoplay off
+			}
+
+			return sound;
 		}
 
 		return NULL;

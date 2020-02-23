@@ -17,6 +17,10 @@ namespace penguine
 		sf::Text* m_Text;
 		std::string m_String;
 
+		bool m_IsVisible = true;
+		float m_StartTime = 0;
+		float m_DisplayTime = .03f;
+
 	public:
 		TextBox();
 		virtual ~TextBox();
@@ -24,8 +28,17 @@ namespace penguine
 		virtual void Update();
 		virtual void Render();
 
+		virtual void CheckAction(std::string actionType);
+
 		void SetString(std::string string);
 		std::string GetString();
+
+		void SetVisibility(bool isVisible);
+		bool GetVisibility();
+
+		void CheckTimer();
+
+		void SetDisplayTime(float time);
 
 		virtual std::string ToString();
 	};
